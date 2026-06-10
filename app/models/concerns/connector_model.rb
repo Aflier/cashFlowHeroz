@@ -75,10 +75,10 @@ module ConnectorModel
 
       # todo: set the correct path and uncomment
 
-      # path = "#{$mission_heroz_url}/#{node.class.name.underscore.pluralize}/#{node.id}/connectors"
-      # broadcast_replace target: "connectors_#{node.class.name.underscore}_#{node.id}",
-      #                   partial: 'connectors/connectors_frame',
-      #                   locals: { node: node, path: path }
+      path = "#{$cash_flow_heroz_url}/#{node.class.name.underscore.pluralize}/#{node.id}/connectors"
+      broadcast_replace target: "connectors_#{node.class.name.underscore}_#{node.id}",
+                        partial: 'connectors/connectors_frame',
+                        locals: { node: node, path: path }
     end
   end
 end
