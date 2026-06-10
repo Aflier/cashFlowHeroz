@@ -1,0 +1,16 @@
+<% settings = connector['settings'] %>
+<% include_in_printout = false if settings.blank? %>
+<% include_in_printout = settings['include_in_printout'].present? unless settings.blank? %>
+<% if node.contributor_up? user %>
+  <% if include_in_printout %>
+    <%= button_to update_connector_user_path(user, connector_uuid: connector['connector_uuid'], connector: { include_in_printout: nil }),
+                  class: "btn btn-sm bg-success-subtle", method: :patch do %>
+      <%= icons__print %>
+    <% end %>
+  <% else %>
+    <%= button_to update_connector_user_path(user, connector_uuid: connector['connector_uuid'], connector: { include_in_printout: true }),
+                  class: "btn bg-primary-subtle btn-sm", method: :patch do %>
+      <%= icons__print %>
+    <% end %>
+  <% end %>
+<% end %>

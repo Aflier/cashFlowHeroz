@@ -1,0 +1,16 @@
+<tr id="<%= dom_id entity_user %>">
+  <td><%= entity_user.user.email %></td>
+  <td class="text-end">
+    <div class="btn btn-group btn-group-sm">
+      <% EntityUser.roles.each do |role| %>
+        <%= button_to entity_user_path(entity_user,
+                                        entity_user: { role: role[0] }),
+                      method: :patch,
+                      class: "btn-edit-sm #{ entity_user.role == role[0] ? 'active' : 'not-active' } " do %>
+          <%= role[0].capitalize %>
+        <% end %>
+
+      <% end %>
+    </div>
+  </td>
+</tr>

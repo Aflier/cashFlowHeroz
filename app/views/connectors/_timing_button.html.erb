@@ -1,0 +1,16 @@
+<% settings = connector["settings"] %>
+<% use_for_timings = false if settings.blank? %>
+<% use_for_timings = settings["use_for_timings"].present? unless settings.blank? %>
+<% if node.contributor_up? user %>
+  <% if use_for_timings %>
+    <%= button_to update_connector_user_path(user, connector_uuid: connector['connector_uuid'], connector: { use_for_timings: nil }),
+                  class: "btn btn-sm bg-success-subtle", method: :patch do %>
+      <%= icons__stopwatch %>
+    <% end %>
+  <% else %>
+    <%= button_to update_connector_user_path(user, connector_uuid: connector['connector_uuid'], connector: { use_for_timings: true }),
+                  class: "btn bg-primary-subtle btn-sm", method: :patch do %>
+      <%= icons__stopwatch %>
+    <% end %>
+  <% end %>
+<% end %>

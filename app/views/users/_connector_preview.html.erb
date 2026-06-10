@@ -1,0 +1,51 @@
+<% if @show_holder %>
+  <div
+    class="offcanvas offcanvas-start w-75"
+    data-turbo-temporary
+    data-controller="off-canvas"
+    data-bs-backdrop="false"
+    tabindex="-1"
+    id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel"
+  >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel">
+
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <div class="row justify-content-md-center">
+        <div class="col-md-9">
+
+          <%= turbo_frame_tag(
+            :connector_preview,
+            src:
+              connector_preview_user_path(
+                current_user,
+                connector_uuid: params["connector_uuid"],
+                connector_type: params["connector_type"],
+                klass: params["klass"],
+                klass_id: params["klass_id"],
+              ),
+            target: :_top,
+          ) do %>
+            <%= icons__spinner %>
+            Loading...
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% elsif %w[Activity Prop Role Ticket Story WorkPackage Project Contact Dashboard ReportType Organisation].include? @connector_type %>
+  <%= turbo_frame_tag :connector_preview, target: :_top do %>
+    <h4><%= raw @title %></h4>
+    <%= raw @rendered %>
+  <% end %>
+<% end %>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for(:title) || "Cash Flow Heroz" %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Cash Flow Heroz">
+  <meta name="mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= yield :head %>
+
+  <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+  <%= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+  <link rel="icon" href="/icony.png" type="image/png">
+  <link rel="icon" href="/icony.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+
+  <%# Includes all stylesheet files in app/assets/stylesheets %>
+  <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
+  <%# HerozSuite icon kit %>
+  <script src="https://kit.fontawesome.com/1d53cfb7a3.js" crossorigin="anonymous"></script>
+
+  <%= favicon_link_tag "/icony.svg" %>
+</head>
+
+<body data-controller="connectors" class="connectors-place h-screen">
+<%= turbo_stream_from current_user if user_signed_in? %>
+
+<%= render "layouts/top_nav" %>
+
+<div class="fle bg-gray-100 mt-10">
+  <!-- Sidebar -->
+  <aside
+    class="
+          w-20 hidden sm:flex bg-slate-800 text-white flex flex-col fixed inset-y-0 top-16
+          fa-2x
+        "
+  >
+    <nav class="flex-1 px-1 py-4 space-y-2 overflow-y-auto">
+      <%= link_to(
+            icons__legal_entity,
+            legal_entities_path,
+            class: "block px-4 py-2 rounded transition hover:bg-slate-700 text-white",
+            ) %>
+
+      <%= if can? :index, Mission
+            link_to(
+              icons__mission,
+              missions_path,
+              class: "block px-4 py-2 rounded transition hover:bg-slate-700 text-white",
+              title: "Missions",
+              )
+          end %>
+
+      <%= render "layouts/connector/connector_fetch" %>
+    </nav>
+    <div class="p-4 border-t border-slate-700">
+      <button class="w-full text-left px-4 py-2 rounded hover:bg-slate-700">H</button>
+    </div>
+  </aside>
+  <!-- Main Content Area -->
+  <main class="flex-1 ml-0 sm:ml-20 p-5 pt-10 overflow-y-auto">
+    <%= yield %>
+    <%= turbo_frame_tag :remote_modal %>
+  </main>
+</div>
+</body>
+</html>

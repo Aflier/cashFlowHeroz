@@ -1,0 +1,34 @@
+<%= link_to $action_heroz_url, class: "nav-link",
+            style: "#{'opacity: 0.5' if request.host.gsub("www.", "") == 'action.heroz.app' } " do %>
+  <%= image_tag 'actionHerozLogo.svg', width: "20" %>
+<% end %>
+
+<%= link_to $mission_heroz_url, class: "nav-link",
+            style: "#{'opacity: 0.5' if request.host.gsub("www.", "") == 'mission.heroz.app' } " do %>
+  <%= image_tag 'MissionHerozLogo.svg', width: "20" %>
+<% end %>
+
+<%= link_to $team_heroz_url, class: "nav-link",
+            style: "#{'opacity: 0.5' if request.host.gsub("www.", "") == 'team.heroz.app' } " do %>
+  <%= image_tag 'teamHerozLogo.svg', width: "20" %>
+<% end %>
+
+<%= link_to $website_heroz_url, class: "nav-link",
+            style: "#{'opacity: 0.5' if request.host.gsub("www.", "") == 'website.heroz.app' } " do %>
+  <%= image_tag 'websiteHerozLogo.svg', width: "20" %>
+<% end %>
+
+<%= link_to $our_score_url, class: "nav-link fa-lg",
+            style: "#{'opacity: 0.5' if request.host.gsub("www.", "") == 'ourscore.business' } " do %>
+  <%=  icons__our_score %>
+<% end %>
+
+<%= link_to $metronome_url, class: "nav-link fa-lg",
+            style: "#{'opacity: 0.5' if request.host.gsub("www.", "") == 'metronome.ourscore.business' } " do %>
+  <%= icons__metronome %>
+<% end %>
+
+<%= link_to $sso_url, class: "nav-link",
+            style: "#{'opacity: 0.5' if request.host.gsub("www.", "") == 'reception.heroz.app' } " do %>
+  <%= image_tag 'receptionHerozLogo.svg', width: "20" %>
+<% end %>

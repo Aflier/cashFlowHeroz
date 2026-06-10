@@ -1,0 +1,16 @@
+<div data-controller="dropdown" class="relative inline-block">
+  <button
+    data-action="click->dropdown#toggleMenu"
+    class="w-full inline-flex items-center gap-2 px-3.5 py-2 bg-white text-slate-700 font-medium text-sm rounded-lg
+        border border-slate-200 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all
+           <%= local_assigns[:classes]&.to_s %>">
+    <%= title %> <%= icons__dropdown %>
+  </button>
+
+  <div
+    data-dropdown-target="menu"
+    class="hidden absolute left-0 mt-2 w-64 bg-white rounded-xl border border-slate-200 shadow-lg py-1.5 z-50 origin-top-right transition-all flex-col">
+    <%= yield %>
+  </div>
+
+</div>

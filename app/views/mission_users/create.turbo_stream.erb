@@ -1,0 +1,10 @@
+<%= turbo_stream.append :mission_users do %>
+  <%= render @mission_user %>
+<% end if @mission_user %>
+
+<%= turbo_stream.replace :new_mission_user do %>
+  <%= turbo_frame_tag :new_mission_user, loading: :lazy,
+                      src: new_mission_mission_user_path(@mission) do %>
+    <%= icons__spinner %> loading...
+  <% end %>
+<% end %>

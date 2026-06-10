@@ -1,0 +1,12 @@
+development:
+  SSO_PROVIDER_URL: 'http://localhost:3009'
+  SSO_APP_ID: 'ABC'
+  SSO_APP_SECRET: 'DEF'
+production:
+  SSO_PROVIDER_URL: 'https://reception.heroz.app'
+  SSO_APP_ID: 'ec07a498b2e6010be541e9c65dde2da9'
+  SSO_APP_SECRET: '75d2b4c427f2c85f634ab4f08556fe26'
+test:
+  SSO_PROVIDER_URL: 'http://localhost:3009'
+  SSO_APP_ID: 'ABC'
+  SSO_APP_SECRET: 'DEF'

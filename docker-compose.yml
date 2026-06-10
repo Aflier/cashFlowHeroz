@@ -1,0 +1,27 @@
+# docker-compose.yml
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    restart: always
+    volumes:
+      - postgres_cash_flow:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cash_flow_development
+    ports:
+      - "3078:5432"
+  postgres_test:
+    image: pgvector/pgvector:pg17
+    restart: always
+    volumes:
+      - postgres_cash_flow_test:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cash_flow_test
+    ports:
+      - "3079:5432"
+volumes:
+  postgres_cash_flow:
+  postgres_cash_flow_test:

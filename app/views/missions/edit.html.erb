@@ -1,0 +1,22 @@
+<h1><%= @mission.name %></h1>
+<h2>Users</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th class="text-right">Role</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="mission_users">
+    <%= render @mission.mission_users %>
+  </tbody>
+</table>
+
+<%= turbo_frame_tag :new_mission_user, loading: :lazy,
+                    src: new_mission_mission_user_path(@mission) do %>
+  <%= icons__spinner %>
+  loading...
+<% end %>
+

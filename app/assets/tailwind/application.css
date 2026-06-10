@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    a {
+        @apply text-blue-600 hover:underline
+    }
+
+    nav a {
+        @apply hover:no-underline opacity-80 hover:opacity-100
+    }
+
+    .button_to {
+        @apply inline-block;
+    }
+
+    .btn-new {
+        @apply w-full sm:w-auto text-center mb-2 sm:mt-0 sm:ml-2 rounded-md px-2.5 py-1.5 bg-blue-200 hover:bg-blue-500 inline-block text-black hover:text-white font-medium float-right hover:no-underline
+    }
+
+    .btn-destroy {
+        @apply hidden w-full sm:w-auto text-center mb-2 sm:mt-0 sm:ml-2 rounded-md px-2.5 py-1.5 bg-red-200 hover:bg-red-500 sm:inline-block text-black hover:text-white font-medium float-right hover:no-underline
+    }
+
+    .btn-edit {
+        @apply hidden w-full sm:w-auto text-center mb-2 sm:mt-0 sm:ml-2 rounded-md px-2.5 py-1.5 bg-blue-200 hover:bg-blue-500 sm:inline-block text-black hover:text-white font-medium float-right hover:no-underline
+    }
+
+    .btn-back {
+        @apply w-full sm:w-auto text-center rounded-md px-2.5 py-1.5 mb-3 bg-gray-200 hover:bg-gray-500 inline-block font-medium float-right text-black hover:text-white hover:no-underline
+    }
+
+    .btn-danger {
+        @apply w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-red-300 hover:bg-red-400 inline-block font-medium
+    }
+
+    .btn-edit-sm {
+        @apply w-full sm:w-auto text-center rounded-md px-1.5 py-1 bg-blue-300 hover:bg-blue-200 text-black inline-block font-medium
+    }
+
+    .btn-trash-sm {
+        @apply w-full sm:w-auto text-center rounded-md px-1.5 py-1 bg-red-300 hover:bg-red-200 text-black inline-block font-medium
+    }
+
+    h1 {
+        @apply text-xl font-extrabold text-black md:text-4xl border-b-3 mb-3 pb-1;
+    }
+
+    input[type="submit"] {
+        @apply w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer
+    }
+
+    input[type="text"] {
+        @apply border-2 border-gray-300 rounded-md px-4 py-2 focus:border-blue-500 focus:outline-none mb-3
+    }
+
+    input[type="email"] {
+        @apply border-2 border-gray-300 rounded-md px-4 py-2 focus:border-blue-500 focus:outline-none mb-3
+    }
+
+    input[type="number"] {
+        @apply border-2 border-gray-300 rounded-md px-4 py-2 focus:border-blue-500 focus:outline-none mb-3
+    }
+
+    .btn {
+        @apply w-full sm:w-auto text-center rounded-md px-3.5 py-2 inline-block font-medium
+    }
+
+    .btn-primary {
+        @apply w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium
+    }
+
+    .bg-success-subtle {
+        @apply bg-green-300
+    }
+
+    .active {
+        @apply opacity-100
+    }
+
+    el-dialog label {
+        @apply text-white
+    }
+
+    .not-active {
+        @apply opacity-20
+    }
+
+    .shadow {
+        @apply shadow-md
+    }
+
+    table {
+        @apply min-w-full border-collapse my-2
+    }
+
+
+    thead > tr {
+        @apply border-b-2 py-3
+    }
+
+    tbody > tr {
+        @apply hover:bg-slate-200 border-b transition-colors py-3
+    }
+
+    th {
+        @apply text-left
+    }
+
+    .row {
+        @apply flex flex-row w-full
+    }
+
+    .col {
+        @apply flex flex-col
+    }
+
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-100%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+
+    .animate-drawer-in {
+        animation: slideInLeft 0.4s ease-out forwards;
+    }
+
+    @keyframes slideOutLeft {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+
+    .animate-drawer-out {
+        animation: slideOutLeft 0.4s ease-out forwards;
+    }
+
+    .row {
+        @apply flex flex-row gap-2
+    }
+
+
+    .col-md-3 {
+        @apply basis-3/12;
+    }
+
+    .col-md-9 {
+        @apply basis-9/12;
+    }
+
+    .col-md-12 {
+        @apply basis-12/12;
+    }
+
+    .input-group {
+        @apply flex flex-row gap-1
+    }
+
+    .form-control {
+        @apply px-3 py-2 rounded-md w-full
+    }
+
+    .card {
+        @apply border rounded-md p-2 border-gray-400 bg-white
+    }
+
+}
+

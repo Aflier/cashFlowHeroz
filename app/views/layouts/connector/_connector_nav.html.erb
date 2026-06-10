@@ -1,0 +1,24 @@
+<%= turbo_frame_tag :connector_nav, target: :_top do %>
+  <%= button_to refresh_connection_user_path(user), method: :patch, class: "btn btn-text fa-lg" do %>
+    <div
+      data-controller="connectors-current"
+      data-connectors-current-start-type-value="<%= user.filter(:start_type) %>"
+      data-connectors-current-start-id-value="<%= user.filter(:start_id) %>"
+      data-connectors-current-finish-type-value="<%= user.filter(:finish_type) %>"
+      data-connectors-current-finish-id-value="<%= user.filter(:finish_id) %>"
+      data-connectors-current-connectors-outlet=".connectors-place"
+    ></div>
+    <% if user.filter(:start_id) %>
+      <div class="text-primary">
+        <%= icons__trace_in %>
+      </div>
+    <% elsif user.filter(:finish_id) %>
+      <div class="text-primary">
+        <%= icons__trace_out %>
+      </div>
+    <% else %>
+      <%= icons__connectors("text-white") %>
+    <% end %>
+  <% end %>
+<% end %>
+

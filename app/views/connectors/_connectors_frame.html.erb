@@ -1,0 +1,6 @@
+<%= turbo_frame_tag dom_id(node, 'connectors'), target: :_top, src: path, loading: :lazy do %>
+  <div class="row">
+    <div class="col-md-6 text-end"><%= icons__spinner %></div>
+    <div class="col-md-6"><%= icons__spinner %></div>
+  </div>
+<% end %>

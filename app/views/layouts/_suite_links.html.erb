@@ -1,0 +1,5 @@
+<% if @mission&.persisted? %>
+  <%= raw @mission.suite_links %>
+<% else %>
+  <%= raw suite_links %>
+<% end %>

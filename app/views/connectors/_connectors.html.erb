@@ -1,0 +1,116 @@
+<%= turbo_frame_tag dom_id(node, 'connectors'), target: :_top do %>
+  <% options = {} if local_assigns[:options].nil? %>
+  <div class="row">
+    <div class="col-md-12">
+      <% node.end_here_connectors.each do |connector| %>
+        <% border = (connector['fromable_uuid'] == current_user.filter(:connector_uuid) and connector['fromable_type'] == current_user.filter(:connector_type) ? 'border border-primary' : '') %>
+
+        <div class="input-group input-group-sm mb-1 <%= border %>">
+          <% if options[:include_start_description] %>
+            <div class="form-control">
+              <%= button_to remove_connector_user_path(current_user), params: { connector_uuid: connector['connector_uuid'] },
+                            method: :delete,
+                            data: { turbo_confirm: 'Are you sure?' },
+                            class: "btn btn-sm bg-danger-subtle" do %>
+                <%= icons__trash %>
+              <% end if node.contributor_up? current_user %>
+
+              <%= render 'connectors/print_button', user: current_user, connector: connector, node: node %>
+
+              <%= connector['settings']['start_description'] if connector['settings'] %>
+            </div>
+          <% end %>
+
+          <div class="form-control <%= connector['bg_style'] %> <%= node.end_style(connector) %> float-end" style="max-width: 145px;">
+            <%= raw "#{connector['fromable_name']} #{icons__trace_in}" %>
+          </div>
+
+          <%= link_to_if can?(:connector_preview, current_user),
+                         raw(icons__slide_right),
+                         connector_preview_user_path(current_user, connector_uuid: connector['fromable_uuid'],
+                                                     connector_type: connector['fromable_type'],
+                                                     klass: node.class.name, klass_id: node.id, show_holder: true),
+                         class: "btn btn-sm bg-primary-subtle", data: { turbo_frame: dom_id(node, 'connectors'), turbo_prefetch: false } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <% node.start_here_connectors.each do |connector| %>
+        <% border = (connector['toable_uuid'] == current_user.filter(:connector_uuid) and connector['toable_type'] == current_user.filter(:connector_type) ? 'border border-primary' : '') %>
+
+        <div class="input-group input-group-sm mb-1 <%= border %>">
+          <%= render 'connectors/timing_button', user: current_user, connector: connector, node: node %>
+
+          <div class="form-control">
+            <%= connector['settings']['finish_description'] if connector['settings'] %>
+          </div>
+          <div class="form-control <%= connector['bg_style'] %>" style="max-width: 145px;">
+            <%= raw "#{icons__trace_out} #{connector['toable_name']}" %>
+          </div>
+          <%= link_to_if can?(:connector_preview, current_user),
+                         raw(icons__slide_right),
+                         connector_preview_user_path(current_user,
+                                                     connector_uuid: connector['toable_uuid'],
+                                                     connector_type: connector['toable_type'],
+                                                     klass: node.class.name, klass_id: node.id, show_holder: true),
+                         class: "btn btn-sm bg-primary-subtle",
+                         data: { turbo_frame: dom_id(node, 'connectors'), turbo_prefetch: false } %>
+        </div>
+      <% end %>
+
+      <% if node.contributor_up?(current_user) %>
+        <%= content_tag :div, node.from_warnings, class: 'alert alert-warning' if node.from_warnings %>
+        <%= content_tag :div, node.to_warnings, class: 'alert alert-warning' if node.to_warnings %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 text-end add-connector">
+      <% if can? :add_connector, node %>
+        <div data-connectors-target="connectorFinish"
+             id="<%= dom_id(node) %>_add_dependents_btn"
+             <%= 'hidden' if current_user.has_connector_finish? %>>
+          <%= button_to update_connecting_user_path(current_user, finish_id: node.id, finish_type: node.class.name),
+                        method: :patch,
+                        class: "btn btn-sm btn-text" do %>
+            <%= icons__plus %>
+            <%= icons__trace_in %>
+          <% end %>
+        </div>
+
+        <div data-connectors-target="connectorFinishOff"
+             class="btn btn-sm btn-text text-info"
+             <%= 'hidden' unless current_user.has_connector_finish? %>>
+          <%= icons__plus %>
+          <%= icons__trace_in %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-6 add-connector">
+      <% if can? :add_connector, node %>
+        <div data-connectors-target="connectorStart"
+             <%= 'hidden' if current_user.has_connector_start? %>>
+          <%= button_to update_connecting_user_path(current_user, start_id: node.id, start_type: node.class.name),
+                        method: :patch,
+                        class: "btn btn-sm btn-text" do %>
+            <%= icons__plus %>
+            <%= icons__trace_out %>
+          <% end %>
+        </div>
+        <div data-connectors-target="connectorStartOff"
+             class="btn btn-sm btn-text text-info"
+             <%= 'hidden' unless current_user.has_connector_start? %>>
+          <%= icons__trace_out %>
+          <%= icons__plus %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= render 'users/connector_preview' if @rendered or @show_holder %>
+
+<% end %>

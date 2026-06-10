@@ -1,0 +1,23 @@
+<tr id="<%= dom_id mission_user %>">
+  <td><%= mission_user&.user&.email %></td>
+  <td class="text-center">
+    <div class="btn btn-group btn-group-sm">
+      <% MissionUser.roles.each do |role| %>
+        <%= button_to mission_user_path(mission_user,
+                                        mission_user: { role: role[0] }),
+                      method: :patch,
+                      class: "btn-edit-sm #{ mission_user.role == role[0] ? 'active' : 'not-active' } " do %>
+          <%= role[0] %>
+        <% end %>
+
+      <% end %>
+    </div>
+  </td>
+  <td class="text-end">
+    <% if mission_user.confirmed_on_sso? %>
+      <div class="btn-sm">Joined</div>
+    <% else %>
+      <%= button_to icons__trash, mission_user_path(mission_user), class: "btn btn-sm btn-danger", method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+    <% end %>
+  </td>
+</tr>
