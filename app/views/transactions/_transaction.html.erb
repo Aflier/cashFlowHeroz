@@ -5,25 +5,27 @@
   <td>
     <%= transaction.why %>
   </td>
-  <td>
+  <td class="text-right">
     <%= transaction.amount %>
   </td>
-  <td class="text-green-500">
+  <td class="text-right text-green-500">
     <% if transaction.in? %>
       <%= transaction.amount %>
     <% elsif transaction.correction? and transaction.amount > 0 %>
       <%= transaction.amount %>
     <% end %>
   </td>
-  <td class="text-red-500">
+  <td class="text-right text-red-500">
     <% if transaction.out? %>
-      -<%= transaction.amount %>
+      (<%= transaction.amount %>)
     <% elsif transaction.correction? and transaction.amount < 0 %>
-      -<%= transaction.amount %>
+      (<%= transaction.amount %>)
     <% end %>
   </td>
 
-  <td class="<%= 'bg-red-500 text-white' if transaction.cumulative_total < 0 %>"><%= transaction.cumulative_total %></td>
+  <td
+    class="text-right <%= 'bg-red-200' if (transaction.cumulative_total.nil? ? false : transaction.cumulative_total < 0) %>"
+  ><%= transaction.cumulative_total %></td>
   <td>
     <%= transaction.business_account_balance %>
   </td>

@@ -108,7 +108,11 @@
     }
 
     th {
-        @apply text-left
+        @apply text-left px-1
+    }
+
+    td {
+      @apply px-1
     }
 
     .row {
