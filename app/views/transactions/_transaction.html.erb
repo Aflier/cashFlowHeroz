@@ -33,9 +33,19 @@
   <td>
     <%= transaction.vat if transaction.vatable? %>
   </td>
-  <td class="text-right">
-    <%= link_to icons__edit, edit_transaction_path(transaction), class: "btn btn-sm btn-primary", data: { turbo_frame: :remote_modal } %>
-    <%= button_to icons__trash, transaction_path(transaction), method: :delete, data: { turbo_confirm: "Are you sure?" },
-                  class: "btn btn-sm btn-danger" %>
+  <td class="text-right py-1">
+    <%= link_to icons__edit,
+    edit_transaction_path(transaction),
+    class: "btn-edit-sm",
+    data: {
+      turbo_frame: :remote_modal,
+    } %>
+    <%= button_to icons__trash,
+    transaction_path(transaction),
+    method: :delete,
+    data: {
+      turbo_confirm: "Are you sure?",
+    },
+    class: "btn-trash-sm" %>
   </td>
 </tr>

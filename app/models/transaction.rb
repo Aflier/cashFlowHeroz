@@ -11,28 +11,38 @@ class Transaction < ApplicationRecord
   scope :ordered, -> { order(transaction_at: :asc, operation: :asc, created_at: :asc) }
 
   def calculate_cumulative_total
+    # Make sure the first transaction is always what it should be
+    transaction__first = mission.transactions.ordered.first
+
+    if transaction__first.cumulative_total.nil?
+      if transaction__first.in? || transaction__first.correction?
+        transaction__first.update(cumulative_total: transaction__first.amount)
+      else
+        transaction__first.update(cumulative_total: - transaction__first.amount)
+      end
+    end
+
     day_before = transaction_at.yesterday
-    last_tx = nil
     ordered_transactions = mission.transactions.ordered.where(transaction_at: day_before..)
+
+    cumulative_total = 0
 
     ordered_transactions.each_with_index do |transaction, index|
       if index == 0
-        if transaction.cumulative_total.nil?
           if transaction.in? || transaction.correction?
-            transaction.update(cumulative_total: 0 + transaction.amount)
+            cumulative_total = transaction.cumulative_total
           else
-            transaction.update(cumulative_total: 0 - transaction.amount)
+            cumulative_total = - transaction.cumulative_total
           end
-        end
-        last_tx = transaction
       else
         if transaction.in? || transaction.correction?
-          transaction.update(cumulative_total: last_tx.cumulative_total + transaction.amount)
+          cumulative_total = cumulative_total + transaction.amount
         else
-          transaction.update(cumulative_total: last_tx.cumulative_total - transaction.amount)
+          cumulative_total = cumulative_total - transaction.amount
         end
       end
-      last_tx = transaction
+
+    transaction.update(cumulative_total: cumulative_total)
     end
   end
 
@@ -46,5 +56,7 @@ class Transaction < ApplicationRecord
     return nil unless vatable?
     return nil if amount.blank?
     self.vat = (amount / 6).round(2)
+
+  self.cumulative_total = nil
   end
 end

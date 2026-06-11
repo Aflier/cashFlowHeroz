@@ -9,8 +9,6 @@ data: {
 } %>
 <h1><%= @mission.name %></h1>
 
-<%= link_to "Connect to Xero Account", xero_connect_path, class: "btn btn-primary" %>
-
 <h1>Transactions</h1>
 <%= paginate @transactions %>
 <table>
@@ -31,4 +29,3 @@ data: {
     <%= render @transactions %>
   </tbody>
 </table>
-
