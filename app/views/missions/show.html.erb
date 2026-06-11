@@ -1,8 +1,27 @@
 <% content_for :title, @mission.name %>
 
 <%= link_to icons__edit, edit_mission_path(@mission), class: "btn-edit float-right" %>
-
+<%= link_to raw("#{icons__plus} Transaction"), new_mission_transaction_path(@mission), class: "btn-edit float-right", data: {turbo_frame: :remote_modal} %>
 <h1><%= @mission.name %></h1>
 
 
-
+<h1>Transactions</h1>
+<%= paginate @transactions %>
+<table>
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Why</th>
+    <th>Amount (Inc. VAT)</th>
+    <th>In</th>
+    <th>Out</th>
+    <th>Cumulative Total</th>
+    <th>Business Account Balance</th>
+    <th>VATable?</th>
+    <th>VAT</th>
+  </tr>
+  </thead>
+  <tbody id="transactions">
+  <%= render @transactions %>
+  </tbody>
+</table>

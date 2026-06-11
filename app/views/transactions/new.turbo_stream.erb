@@ -1,0 +1,11 @@
+<%= turbo_stream.replace :remote_modal do %>
+  <%= turbo_frame_tag :remote_modal, target: :_top do %>
+    <%= form_with(model: @path, class: "contents") do |form| %>
+      <%= render 'shared/modal', title: "New Transaction",
+                 submit: form.submit(class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer",
+                                     data: { turbo_frame: :_top }) do %>
+        <%= render "form", transaction: @transaction, form: form %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

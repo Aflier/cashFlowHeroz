@@ -6,7 +6,7 @@ class MissionUser < ApplicationRecord
   attr_accessor :email
   def confirmed_on_sso?
     return if Rails.env.test?
-    response = RestClient.get "#{ENV['SSO_PROVIDER_URL']}/api/v001/users/confirmed?email=#{user.email}"
+    response = RestClient.get "#{ENV['SSO_PROVIDER_URL']}/api/v001/users/confirmed?email=#{user.email_address}"
     response = JSON.parse(response)
     response["confirmed"]
   end

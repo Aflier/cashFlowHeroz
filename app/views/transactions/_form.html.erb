@@ -1,0 +1,59 @@
+<% if transaction.errors.any? %>
+  <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+    <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+    <ul class="list-disc ml-6">
+      <% transaction.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="my-5">
+  <%= form.label :transaction_at %>
+  <%= form.date_field :transaction_at, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": transaction.errors[:transaction_at].none?, "border-red-400 focus:outline-red-600": transaction.errors[:transaction_at].any? }] %>
+</div>
+
+<div class="my-5">
+  <%= form.label :why %>
+  <%= form.text_field :why, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": transaction.errors[:why].none?, "border-red-400 focus:outline-red-600": transaction.errors[:why].any? }] %>
+</div>
+
+<div class="my-5">
+  <%= form.label :amount %>
+  <%= form.number_field :amount, step: 0.01,
+                        class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": transaction.errors[:amount].none?, "border-red-400 focus:outline-red-600": transaction.errors[:amount].any? }] %>
+</div>
+<div class="my-5">
+  <%= form.label :operation %>
+  <div class="block shadow-sm rounded-md border px-3 py-2 mt-2 w-full <%= transaction.errors[:operation].any? ? "border-red-400 focus:outline-red-600" : "border-gray-400 focus:outline-blue-600" %>">
+    <div class="flex">
+      <% Transaction.operations.each do |operation| %>
+        <p class="px-2">
+          <%= operation[0].humanize.capitalize %> <%= form.radio_button :operation, operation[0] %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="my-5">
+  <%= form.label :business_account_balance %>
+  <%= form.text_field :business_account_balance, step: 0.01,
+                      class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": transaction.errors[:business_account_balance].none?, "border-red-400 focus:outline-red-600": transaction.errors[:business_account_balance].any? }] %>
+</div>
+
+<div class="my-5 flex items-center gap-2">
+  <%= form.label :vatable %>
+  <%= form.checkbox :vatable, class: ["block shadow-sm rounded-md border order-first h-5 w-5", { "border-gray-400 focus:outline-blue-600": transaction.errors[:vatable].none?, "border-red-400 focus:outline-red-600": transaction.errors[:vatable].any? }] %>
+</div>
+
+<% if false %>
+  <div class="my-5">
+    <%= form.label :vat %>
+    <%= form.text_field :vat, step: 0.01,
+                        class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": transaction.errors[:vat].none?, "border-red-400 focus:outline-red-600": transaction.errors[:vat].any? }] %>
+  </div>
+<% end %>
+

@@ -83,7 +83,7 @@
     }
 
     el-dialog label {
-        @apply text-white
+        @apply text-black
     }
 
     .not-active {

@@ -1,4 +1,4 @@
-<h1>Your Missions: <%= Current.user.email %></h1>
+<h1>Your Missions: <%= Current.user.email_address %></h1>
 
 <% @missions.each do |mission| %>
   <p><%= link_to_if (can? :show, mission), mission.name, mission %></p>

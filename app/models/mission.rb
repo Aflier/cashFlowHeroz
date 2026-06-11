@@ -3,6 +3,7 @@ class Mission < ApplicationRecord
   belongs_to :legal_entity
   has_many :mission_users
   has_many :users, through: :mission_users
+  has_many :transactions
 
   def suite_links
     return if sso_uuid.blank?

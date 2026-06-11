@@ -8,6 +8,7 @@ class MissionsController < ApplicationController
   end
 
   def show
+    @transactions = @mission.transactions.ordered.page(params[:page])
   end
 
   def edit

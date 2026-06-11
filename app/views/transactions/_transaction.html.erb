@@ -1,0 +1,41 @@
+<tr id="<%= dom_id transaction %>">
+  <td>
+    <%= transaction.transaction_at %>
+  </td>
+  <td>
+    <%= transaction.why %>
+  </td>
+  <td>
+    <%= transaction.amount %>
+  </td>
+  <td class="text-green-500">
+    <% if transaction.in? %>
+      <%= transaction.amount %>
+    <% elsif transaction.correction? and transaction.amount > 0 %>
+      <%= transaction.amount %>
+    <% end %>
+  </td>
+  <td class="text-red-500">
+    <% if transaction.out? %>
+      -<%= transaction.amount %>
+    <% elsif transaction.correction? and transaction.amount < 0 %>
+      -<%= transaction.amount %>
+    <% end %>
+  </td>
+
+  <td class="<%= 'bg-red-500 text-white' if transaction.cumulative_total < 0 %>"><%= transaction.cumulative_total %></td>
+  <td>
+    <%= transaction.business_account_balance %>
+  </td>
+  <td>
+    <%= transaction.vatable? ? "Yes" : "No" unless transaction.vatable.nil? %>
+  </td>
+  <td>
+    <%= transaction.vat if transaction.vatable? %>
+  </td>
+  <td class="text-right">
+    <%= link_to icons__edit, edit_transaction_path(transaction), class: "btn btn-sm btn-primary", data: { turbo_frame: :remote_modal } %>
+    <%= button_to icons__trash, transaction_path(transaction), method: :delete, data: { turbo_confirm: "Are you sure?" },
+                  class: "btn btn-sm btn-danger" %>
+  </td>
+</tr>

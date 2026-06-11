@@ -24,7 +24,7 @@ class Ability
       end
 
       # Mission permissions: responsible and contributor can view and update
-      can [:show, :update, :connectors, :add_connector], Mission do |mission|
+      can [:show, :update], Mission do |mission|
         mission.mission_users.find_by(user: user, role: [:responsible, :contributor])
       end
 
@@ -38,6 +38,15 @@ class Ability
         mission_user.mission.mission_users.find_by(user: user, role: [:responsible, :contributor])
       end
 
+      #Transaction permissions: responsible and contributor can create
+      can [:new, :create], Transaction do |transaction|
+        transaction.mission.mission_users.find_by(user: user, role: [:responsible, :contributor])
+      end
+
+      # Transaction permissions: responsible and contributor can modify
+      can [:edit, :update, :destroy], Transaction do |transaction|
+        transaction.mission.mission_users.find_by(user: user, role: [:responsible, :contributor])
+      end
 
     end
   end

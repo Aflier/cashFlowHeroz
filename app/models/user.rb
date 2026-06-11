@@ -13,11 +13,11 @@ class User < ApplicationRecord
 
   # Method to find or create a user from the OAuth hash
   def self.from_omniauth(auth)
-    if (existing_user = User.find_by(email: auth.info.email, uid: nil))
+    if (existing_user = User.find_by(email_address: auth.info.email, uid: nil))
       existing_user.update(provider: auth.provider, uid: auth.uid, in_mission_control: true)
     else
       where(provider: auth.provider, uid: auth.uid).first_or_create do |new_user|
-        new_user.email = auth.info.email
+        new_user.email_address = auth.info.email
         # Generate a password for OAuth-only users to satisfy has_secure_password
         new_user.password = "password"
         new_user.in_mission_control = true

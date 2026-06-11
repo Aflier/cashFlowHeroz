@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :transactions, except: %i[new create]
   resource :session
   namespace :api do
     namespace :v001 do
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
   resources :entity_users, only: [:update]
   resources :missions do
     resources :mission_users, only: %i[new create], shallow: true
+    resources :transactions, only: %i[new create], shallow: true
     member do
       get :connectors
     end
