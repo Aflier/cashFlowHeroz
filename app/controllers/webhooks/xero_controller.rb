@@ -15,21 +15,56 @@ module Webhooks
       # 2. Validate the signature
       if valid_signature?(raw_payload, xero_signature)
         # 3. Parse and pass valid events to a background job
-        payload_data = JSON.parse(raw_payload)
 
-        if payload_data["events"].any?
-          XeroWebhookJob.perform_later(payload_data["events"])
+        events = params[:events] || []
+
+        events.each do |event|
+          next unless event[:eventCategory] == "INVOICE"
+
+          # 2. Extract key identifiers
+          invoice_guid = event[:resourceId]
+          tenant_id = event[:tenantId]
+          # 3. Initialize your authenticated Xero client
+          # Ensure you have refreshed/retrieved valid OAuth2 tokens for this tenant
+          xero_client = initialize_xero_client
+
+          begin
+            # 4. Request full invoice details
+            # The single get_invoice method returns line_items by default
+            response = xero_client.accounting_api.get_invoice(tenant_id, invoice_guid)
+            invoice = response.invoices.first
+            # 5. Safely access your invoice line details
+            puts "Invoice Number: #{invoice.invoice_number}"
+            puts "Total Amount: #{invoice.total}"
+            invoice.line_items.each do |item|
+              puts "Item: #{item.description} - #{item.line_amount}"
+            end
+
+          rescue XeroRuby::ApiError => e
+             Rails.logger.error "Xero API Exception: #{e.message} (Code: #{e.code})"
+          end
         end
-
-        # 4. Respond with 200 OK and no body or cookies (required by Xero)
-        head :ok
+          # 4. Respond with 200 OK and no body or cookies (required by Xero)
+          head :ok
       else
-        # Fail immediately if the signature does not match
-        head :unauthorized
+          # Fail immediately if the signature does not match
+          head :unauthorized
       end
     end
 
     private
+
+    def initialize_xero_client
+      client = XeroRuby::ApiClient.new(credentials: {
+        client_id: "A2A6438EF0474E849498A5725D407E9D",
+        client_secret: "MP1JXABIEBfMLurERFECFGfdze6Tu3Gteno2Ht9f0sLI97lX",
+        redirect_uri: ENV["XERO_REDIRECT_URI"]
+      })
+
+      # Load your stored token set for this user connection
+      # client.refresh_token_set(stored_token_set)
+      client
+    end
 
     def valid_signature?(payload, signature)
       return false if signature.blank? || payload.blank?

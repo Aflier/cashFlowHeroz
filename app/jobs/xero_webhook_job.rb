@@ -2,7 +2,7 @@
 class XeroWebhookJob < ApplicationJob
   queue_as :default
 
-  def perform(event)
+  def perform(events)
     resource_id = event["resourceId"]     # e.g., Invoice ID or Contact ID
     event_type  = event["eventType"]      # e.g., "Create", "Update"
     category    = event["eventCategory"]  # e.g., "INVOICE", "CONTACT"
