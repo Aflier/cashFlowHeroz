@@ -5,6 +5,8 @@ module Webhooks
     skip_before_action :verify_authenticity_token
 
     def create
+      puts ">>>>>>> Starting to handle Xero Webhook"
+
       # 1. Fetch Xero's signature and read the raw unparsed payload
       xero_signature = request.headers["X-Xero-Signature"]
       raw_payload = request.raw_post
