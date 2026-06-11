@@ -1,22 +1,50 @@
-# app/jobs/xero_webhook_job.rb
-class XeroWebhookJob < ApplicationJob
+
+# app/jobs/fetch_xero_invoice_job.rb
+class FetchXeroInvoiceJob < ApplicationJob
   queue_as :default
 
-  def perform(events)
-    resource_id = event["resourceId"]     # e.g., Invoice ID or Contact ID
-    event_type  = event["eventType"]      # e.g., "Create", "Update"
-    category    = event["eventCategory"]  # e.g., "INVOICE", "CONTACT"
+  def perform(invoice_guid, tenant_id)
+    # 1. Fetch matching organization credentials
+    token_record = Mission.find_by!(tenant_id: tenant_id)
 
-    case category
-    when "INVOICE"
+    # 2. Build and establish an API client session
+    xero_client = XeroRuby::ApiClient.new(credentials: {
+      client_id: "A2A6438EF0474E849498A5725D407E9D",
+      client_secret: "MP1JXABIEBfMLurERFECFGfdze6Tu3Gteno2Ht9f0sLI97lX",
+      redirect_uri: "https://portal.aflier.com/auth/xero_oauth2/callback"
+    })
 
-      puts ">>>>>>>>> INVOICE #{event}"
+    # 3. Populate existing OAuth tokens into client
+    xero_client.set_token_set({
+      "access_token" => token_record.access_token,
+      "refresh_token" => token_record.refresh_token,
+      "expires_at" => token_record.expires_at.to_i
+    })
 
+    # 4. Check for token expiration and refresh automatically
+    if Time.current >= token_record.expires_at
+      new_tokens = xero_client.refresh_token_set(xero_client.token_set)
 
-      # Implement your system sync logic here
-      # (e.g., fetch the full invoice using the xero-ruby SDK)
-    when "CONTACT"
-      # Sync updated contact info
+      token_record.update!(
+        access_token: new_tokens["access_token"],
+        refresh_token: new_tokens["refresh_token"],
+        expires_at: Time.at(new_tokens["expires_at"])
+      )
+    end
+
+    # 5. Fetch full deep invoice content records (including structural item arrays)
+    response = xero_client.accounting_api.get_invoice(tenant_id, invoice_guid)
+    invoice = response.invoices.first
+
+    # 6. Read structural invoice parameters
+    Rails.logger.info "--- Processing Xero Invoice ---"
+    Rails.logger.info "Invoice Number: #{invoice.invoice_number}"
+    Rails.logger.info "Contact Person: #{invoice.contact.name}"
+    Rails.logger.info "Invoice Total: #{invoice.total}"
+
+    # Extract deep object details
+    invoice.line_items.each do |line|
+      Rails.logger.info "Line Item: #{line.description} | Price: #{line.line_amount}"
     end
   end
 end

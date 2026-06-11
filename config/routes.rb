@@ -60,5 +60,10 @@ Rails.application.routes.draw do
   # Custom logout
   match "/logout", to: "oauth_callbacks#destroy", via: :all
 
-  post "/webhooks/xero", to: "webhooks/xero#create"
+  # Endpoint where Xero sends live webhook events
+  post "webhooks/xero", to: "xero_webhooks#receive"
+
+  # OAuth authentication routing
+  get "xero/connect", to: "xero_sessions#connect"
+  get "xero/callback", to: "xero_sessions#callback"
 end

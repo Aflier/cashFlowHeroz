@@ -82,10 +82,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_113833) do
   end
 
   create_table "missions", force: :cascade do |t|
+    t.string "access_token"
     t.datetime "created_at", null: false
+    t.datetime "expires_at"
     t.bigint "legal_entity_id", null: false
     t.string "name"
+    t.string "refresh_token"
     t.string "sso_uuid"
+    t.string "tenant_id"
     t.datetime "updated_at", null: false
     t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.string "xero_webhook_key"

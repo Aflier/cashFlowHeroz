@@ -87,3 +87,5 @@ gem "aws-sdk-s3"
 gem "tailwindcss-rails", "~> 4.4"
 
 gem "rest-client"
+
+gem "xero-ruby"
