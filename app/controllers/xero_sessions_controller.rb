@@ -48,7 +48,7 @@ puts ">>>>>>>>> #{mission.name}"
       mission.update!(
         access_token: token_set["access_token"],
         refresh_token: token_set["refresh_token"],
-        expires_at: Time.at(token_set["expires_at"])
+        expires_at: Time.current + token_set["expires_in"].to_i.seconds
       )
 
       flash[:notice] = "Successfully connected to Xero organization!"

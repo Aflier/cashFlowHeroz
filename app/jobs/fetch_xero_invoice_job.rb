@@ -28,7 +28,7 @@ class FetchXeroInvoiceJob < ApplicationJob
       token_record.update!(
         access_token: new_tokens["access_token"],
         refresh_token: new_tokens["refresh_token"],
-        expires_at: Time.at(new_tokens["expires_at"])
+        expires_at: Time.current + token_set["expires_in"].to_i.seconds
       )
     end
 
