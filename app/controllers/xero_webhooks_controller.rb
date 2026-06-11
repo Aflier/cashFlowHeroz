@@ -33,7 +33,7 @@ class XeroWebhooksController < ApplicationController
     # Offload event logs cleanly to background processes
     payload["events"]&.each do |event|
       if event["eventCategory"] == "INVOICE"
-        FetchXeroInvoiceJob.perform_later(
+        FetchXeroInvoiceJob.perform_now(
           event["resourceId"], # This is the unique Invoice GUID
           event["tenantId"]     # This is the Xero Organisation ID
         )
