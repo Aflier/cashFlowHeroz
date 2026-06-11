@@ -11,7 +11,7 @@ class FetchXeroInvoiceJob < ApplicationJob
     xero_client = XeroRuby::ApiClient.new(credentials: {
       client_id: "6BA15BB4624A4F6FAC746B1B302B745B",
       client_secret: "-Z6LPwWU-LD3cmuCEchlkPxYLoTz-vOkVqsTYkvVkH8tQVMM",
-      redirect_uri: "https://cash.heroz.app/auth/xero_oauth2/callback"
+      redirect_uri: "https://cash.heroz.app/xero/callback"
     })
 
     # 3. Populate existing OAuth tokens into client
