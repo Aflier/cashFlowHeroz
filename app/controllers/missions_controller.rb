@@ -27,6 +27,6 @@ class MissionsController < ApplicationController
 
 
   def mission_params
-    params.expect(mission: [ :tenant_id ])
+    params.expect(mission: [ :tenant_id, :xero_webhook_key  ])
   end
 end
