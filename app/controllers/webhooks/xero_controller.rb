@@ -3,6 +3,7 @@ module Webhooks
   class XeroController < ApplicationController
     # Skip CSRF token checks for API/Webhook controllers
     skip_before_action :verify_authenticity_token
+    allow_unauthenticated_access only: %i[ create ]
 
     def create
       puts ">>>>>>> Starting to handle Xero Webhook"
