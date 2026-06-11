@@ -40,8 +40,11 @@ class XeroSessionsController < ApplicationController
       tenant_id = active_connection["tenantId"]
 
       # 4. Save or update the tokens in your database for background workers to use
-      xero_token = Mission.find_by(tenant_id: tenant_id)
-      xero_token.update!(
+      mission = Mission.find_by(tenant_id: tenant_id)
+
+puts ">>>>>>>>> #{mission.name}"
+
+      mission.update!(
         access_token: token_set["access_token"],
         refresh_token: token_set["refresh_token"],
         expires_at: Time.at(token_set["expires_at"])
