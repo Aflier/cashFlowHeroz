@@ -58,7 +58,7 @@ module Webhooks
       client = XeroRuby::ApiClient.new(credentials: {
         client_id: "A2A6438EF0474E849498A5725D407E9D",
         client_secret: "MP1JXABIEBfMLurERFECFGfdze6Tu3Gteno2Ht9f0sLI97lX",
-        redirect_uri: ENV["XERO_REDIRECT_URI"]
+        redirect_uri: "https://portal.aflier.com/auth/xero_oauth2/callback"
       })
 
       # Load your stored token set for this user connection
