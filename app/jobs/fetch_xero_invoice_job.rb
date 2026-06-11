@@ -1,9 +1,10 @@
 
 # app/jobs/fetch_xero_invoice_job.rb
 class FetchXeroInvoiceJob < ApplicationJob
-  queue_as :default
-
   def perform(invoice_guid, tenant_id)
+    puts ">>>>>>> Doing the Job now"
+
+
     # 1. Fetch matching organization credentials
     token_record = Mission.find_by!(tenant_id: tenant_id)
 

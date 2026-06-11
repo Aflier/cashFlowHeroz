@@ -27,6 +27,9 @@ class XeroWebhooksController < ApplicationController
     # 4. Handle a successful validation request
     payload = JSON.parse(raw_body)
 
+    puts ">>>>>>>>>>>>> Recieved an INVOICE"
+
+
     # Offload event logs cleanly to background processes
     payload["events"]&.each do |event|
       if event["eventCategory"] == "INVOICE"
