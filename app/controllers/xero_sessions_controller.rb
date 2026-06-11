@@ -61,9 +61,9 @@ class XeroSessionsController < ApplicationController
   # Centralised configuration helper for the Xero Ruby SDK client
   def initialize_xero_client
     XeroRuby::ApiClient.new(credentials: {
-      client_id: "A2A6438EF0474E849498A5725D407E9D",
-      client_secret: "MP1JXABIEBfMLurERFECFGfdze6Tu3Gteno2Ht9f0sLI97lX",
-      redirect_uri: "https://portal.aflier.com/auth/xero_oauth2/callback"
+      client_id: "6BA15BB4624A4F6FAC746B1B302B745B",
+      client_secret: "-Z6LPwWU-LD3cmuCEchlkPxYLoTz-vOkVqsTYkvVkH8tQVMM",
+      redirect_uri: "https://cash.heroz.app/auth/xero_oauth2/callback"
     })
   end
 end

@@ -1,6 +1,6 @@
 class MissionsController < ApplicationController
   include ConnectableControl
-  before_action :set_mission, only: %i[ show edit connectors ]
+  before_action :set_mission, only: %i[ show edit connectors update ]
   load_and_authorize_resource
 
   def index
@@ -14,8 +14,19 @@ class MissionsController < ApplicationController
   def edit
   end
 
+  def update
+    @mission.update(mission_params)
+
+    redirect_to @mission
+  end
+
   private
   def set_mission
     @connectable = @mission = Mission.find(params[:id])
+  end
+
+
+  def mission_params
+    params.expect(mission: [ :tenant_id ])
   end
 end

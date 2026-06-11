@@ -17,7 +17,13 @@
     <% if mission_user.confirmed_on_sso? %>
       <div class="btn-sm">Joined</div>
     <% else %>
-      <%= button_to icons__trash, mission_user_path(mission_user), class: "btn btn-sm btn-danger", method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+      <%= button_to icons__trash,
+      mission_user_path(mission_user),
+      class: "btn btn-sm btn-danger",
+      method: :delete,
+      data: {
+        turbo_confirm: "Are you sure?",
+      } %>
     <% end %>
   </td>
 </tr>
