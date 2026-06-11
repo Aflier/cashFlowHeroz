@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_10_114105) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_11_113833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -88,6 +88,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_114105) do
     t.string "sso_uuid"
     t.datetime "updated_at", null: false
     t.uuid "uuid", default: -> { "gen_random_uuid()" }
+    t.string "xero_webhook_key"
     t.index ["legal_entity_id"], name: "index_missions_on_legal_entity_id"
   end
 

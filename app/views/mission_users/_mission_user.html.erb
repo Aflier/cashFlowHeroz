@@ -1,5 +1,5 @@
 <tr id="<%= dom_id mission_user %>">
-  <td><%= mission_user&.user&.email %></td>
+  <td><%= mission_user&.user&.email_address %></td>
   <td class="text-center">
     <div class="btn btn-group btn-group-sm">
       <% MissionUser.roles.each do |role| %>
