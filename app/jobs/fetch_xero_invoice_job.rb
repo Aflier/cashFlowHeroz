@@ -43,12 +43,13 @@ class FetchXeroInvoiceJob < ApplicationJob
     Rails.logger.info "Contact Person: #{invoice.contact.name}"
     Rails.logger.info "Invoice Total: #{invoice.total}"
 
-    token_record.transactions.find_or_create_by!(why: invoice.invoice_number) do |transaction|
+    transaction = token_record.transactions.find_or_create_by!(why: invoice.invoice_number) do |transaction|
       transaction.transaction_at = Date.today
       transaction.amount = invoice.total
       transaction.operation = 1
     end
 
+    transaction.calculate_cumulative_total
 
     # Extract deep object details
     invoice.line_items.each do |line|
