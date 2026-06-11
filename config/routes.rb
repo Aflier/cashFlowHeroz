@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v001 do
       resources :legal_entities do
-        resources :missions, only: [:create]
+        resources :missions, only: [ :create ]
       end
       resources :users do
         member do
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   end
 
   resources :legal_entities
-  resources :entity_users, only: [:update]
+  resources :entity_users, only: [ :update ]
   resources :missions do
     resources :mission_users, only: %i[new create], shallow: true
     resources :transactions, only: %i[new create], shallow: true
@@ -59,4 +59,6 @@ Rails.application.routes.draw do
 
   # Custom logout
   match "/logout", to: "oauth_callbacks#destroy", via: :all
+
+  post "/webhooks/xero", to: "webhooks/xero#create"
 end
