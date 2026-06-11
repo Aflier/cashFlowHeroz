@@ -3,6 +3,7 @@
 class XeroWebhooksController < ApplicationController
   # Disable Rails CSRF protection specifically for Xero's third-party endpoint
   skip_before_action :verify_authenticity_token
+  allow_unauthenticated_access only: %i[ receive ]
 
   def receive
     # 1. Capture the unparsed text body string
