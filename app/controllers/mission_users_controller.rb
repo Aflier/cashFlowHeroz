@@ -13,7 +13,7 @@ class MissionUsersController < ApplicationController
 
   def create
     @mission = Mission.find(params[:mission_id])
-    @user = User.find_by(email: params[:mission_user][:email])
+    @user = User.find_by(email_address: params[:mission_user][:email])
 
     if @user.nil?
       response = RestClient.get "#{ENV['SSO_PROVIDER_URL']}/api/v001/users/new_user?email=#{params[:mission_user][:email]}&site_url=#{request.base_url}"

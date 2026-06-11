@@ -9,7 +9,7 @@ class Api::V001::MissionsController < Api::V001::BaseController
 
     mission = legal_entity.missions.create(mission_params)
     if mission
-      user = User.find_or_create_by!(email: params[:user][:email]) do |user|
+      user = User.find_or_create_by!(email_address: params[:user][:email]) do |user|
         user.password = 'password-secret'
       end
       legal_entity.entity_users.find_or_create_by(user: user, role: :responsible)

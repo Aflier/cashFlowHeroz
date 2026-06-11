@@ -11,8 +11,8 @@ if Rails.env.production?
   $metronome_url = "https://metronome.ourscore.business"
   $referral_heroz_url = "https://referral.heroz.app"
   $meeting_heroz_url = "https://meeting.heroz.app"
-  $asset_flow_heroz_url = "https://assetflow.heroz.app"
-  $cash_flow_heroz_url = "https://cashflow.heroz.app"
+  $asset_flow_heroz_url = "https://asset.heroz.app"
+  $cash_flow_heroz_url = "https://cash.heroz.app"
 else
   $sso_url = 'http://localhost:3009'
   $sso_app_uuid = 'ABC'
@@ -27,5 +27,5 @@ else
   $referral_heroz_url = "http://localhost:3006"
   $meeting_heroz_url = "http://localhost:3010"
   $asset_flow_heroz_url = "http://localhost:3011"
-  $cash_flow_heroz_url = "http;//localhost:3012"
+  $cash_flow_heroz_url = "http://localhost:3012"
 end

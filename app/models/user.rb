@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :entity_users
   has_many :legal_entities, through: :entity_users
 
-  normalizes :email, with: ->(e) { e.strip.downcase }
+  normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   # Method to find or create a user from the OAuth hash
   def self.from_omniauth(auth)
