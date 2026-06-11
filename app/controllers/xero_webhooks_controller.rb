@@ -14,7 +14,7 @@ class XeroWebhooksController < ApplicationController
     calculated_signature = Base64.encode64(
       OpenSSL::HMAC.digest(
         OpenSSL::Digest.new("sha256"),
-        ENV["XERO_WEBHOOK_KEY"],
+        Mission.find(1).xero_webhook_key,
         raw_body
       )
     ).strip
