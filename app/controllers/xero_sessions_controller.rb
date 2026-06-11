@@ -43,6 +43,7 @@ class XeroSessionsController < ApplicationController
       mission = Mission.find_by(tenant_id: tenant_id)
 
 puts ">>>>>>>>> #{mission.name}"
+      puts ">>>>>>>> #{token_set}"
 
       mission.update!(
         access_token: token_set["access_token"],
