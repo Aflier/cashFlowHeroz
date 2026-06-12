@@ -52,7 +52,8 @@ class FetchXeroInvoiceJob < ApplicationJob
       transaction.raw = invoice.to_s
     end
 
-    transaction.update(transaction_at: invoice_due_date, why: invoice.invoice_number)
+    transaction.update(transaction_at: invoice_due_date, why: "#{invoice.invoice_number} - #{invoice.contact.name}")
+
     transaction.calculate_cumulative_total
 
     # Extract deep object details
