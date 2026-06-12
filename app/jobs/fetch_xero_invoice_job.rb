@@ -46,6 +46,7 @@ class FetchXeroInvoiceJob < ApplicationJob
     transaction = token_record.transactions.find_or_create_by!(why: invoice.invoice_number) do |transaction|
       transaction.amount = invoice.total
       transaction.operation = 1
+      transaction.transaction_at = invoice.due_date
       transaction.raw = invoice.to_s
     end
 
