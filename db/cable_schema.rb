@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_12_074925) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_12_100032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -260,6 +260,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_12_074925) do
     t.decimal "vat"
     t.boolean "vatable"
     t.string "why"
+    t.string "xero_uuid"
     t.index ["mission_id"], name: "index_transactions_on_mission_id"
   end
 

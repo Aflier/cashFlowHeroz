@@ -45,15 +45,14 @@ class FetchXeroInvoiceJob < ApplicationJob
 
     invoice_due_date = (invoice.due_date ? invoice.due_date : 2.weeks.from_now)
 
-    transaction = token_record.transactions.find_or_create_by!(why: invoice.invoice_number) do |transaction|
+    transaction = token_record.transactions.find_or_create_by!(xero_uuid: invoice.invoice_id) do |transaction|
       transaction.amount = invoice.total
       transaction.operation = 1
       transaction.transaction_at = invoice_due_date
       transaction.raw = invoice.to_s
     end
 
-    transaction.update(transaction_at: invoice_due_date)
-
+    transaction.update(transaction_at: invoice_due_date, why: invoice.invoice_number)
     transaction.calculate_cumulative_total
 
     # Extract deep object details
