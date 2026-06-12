@@ -29,11 +29,8 @@ class Transaction < ApplicationRecord
 
     ordered_transactions.each_with_index do |transaction, index|
       if index == 0
-          if transaction.in? || transaction.correction?
-            cumulative_total = transaction.cumulative_total
-          else
-            cumulative_total = - transaction.cumulative_total
-          end
+        # Trust the first one.
+        cumulative_total = transaction.cumulative_total
       else
         if transaction.in? || transaction.correction?
           cumulative_total = cumulative_total + transaction.amount
