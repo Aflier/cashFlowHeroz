@@ -47,6 +47,7 @@ class FetchXeroInvoiceJob < ApplicationJob
       transaction.transaction_at = Date.today
       transaction.amount = invoice.total
       transaction.operation = 1
+      transaction.raw = invoice.to_s
     end
 
     transaction.calculate_cumulative_total
