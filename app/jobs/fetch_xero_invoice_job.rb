@@ -43,14 +43,16 @@ class FetchXeroInvoiceJob < ApplicationJob
     Rails.logger.info "Contact Person: #{invoice.contact.name}"
     Rails.logger.info "Invoice Total: #{invoice.total}"
 
+    invoice_due_date = (invoice.due_date ? invoice.due_date : 2.weeks.from_now)
+
     transaction = token_record.transactions.find_or_create_by!(why: invoice.invoice_number) do |transaction|
       transaction.amount = invoice.total
       transaction.operation = 1
-      transaction.transaction_at = invoice.due_date
+      transaction.transaction_at = invoice_due_date
       transaction.raw = invoice.to_s
     end
 
-    transaction.update(transaction_at: invoice.due_date)
+    transaction.update(transaction_at: invoice_due_date)
 
     transaction.calculate_cumulative_total
 
