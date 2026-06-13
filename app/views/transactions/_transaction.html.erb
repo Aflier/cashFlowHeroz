@@ -1,11 +1,15 @@
-<tr id="<%= dom_id transaction %>">
-  <td>
-    <%= link_to transaction.transaction_at, transaction %>
+<tr class="sm:hidden">
+  <td class="py-1" colspan="5"><%= transaction.why %></td>
+</tr>
+
+<tr id="<%= dom_id transaction %>" class="border-b-2">
+  <td class="py-1">
+    <%= link_to transaction.transaction_at.strftime("%d %b"), transaction %>
   </td>
-  <td>
+  <td class="hidden sm:table-cell">
     <%= transaction.why %>
   </td>
-  <td class="text-right">
+  <td class="text-right hidden sm:table-cell">
     <%= transaction.amount %>
   </td>
   <td class="text-right text-green-500">
@@ -26,16 +30,16 @@
   <td
     class="text-right <%= 'bg-red-200' if (transaction.cumulative_total.nil? ? false : transaction.cumulative_total < 0) %>"
   ><%= transaction.cumulative_total %></td>
-  <td>
+  <td class="hidden sm:table-cell">
     <%= transaction.business_account_balance %>
   </td>
-  <td>
+  <td class="hidden sm:table-cell">
     <%= transaction.vatable? ? "Yes" : "No" unless transaction.vatable.nil? %>
   </td>
-  <td>
+  <td class="hidden sm:table-cell">
     <%= transaction.vat if transaction.vatable? %>
   </td>
-  <td class="text-right py-1">
+  <td class="text-right py-1 hidden sm:table-cell">
     <%= link_to icons__edit,
     edit_transaction_path(transaction),
     class: "btn-edit-sm",

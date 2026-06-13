@@ -15,14 +15,15 @@ data: {
   <thead>
     <tr>
       <th>Date</th>
-      <th>Why</th>
-      <th class="text-right">Amount (Inc. VAT)</th>
+      <th class="hidden sm:table-cell">Why</th>
+      <th class="text-right hidden sm:table-cell">Amount (Inc. VAT)</th>
       <th class="text-right w-20">In</th>
       <th class="text-right w-20">Out</th>
-      <th class="text-right">Cumulative Total</th>
-      <th class="text-right">Business Account Balance</th>
-      <th>VATable?</th>
-      <th class="text-right">VAT</th>
+      <th class="text-right hidden sm:table-cell">Business Account Balance</th>
+      <th class="text-right sm:hidden">Balance</th>
+      <th class="text-right hidden sm:table-cell">Cumulative Total</th>
+      <th class="hidden sm:table-cell">VATable?</th>
+      <th class="text-right hidden sm:table-cell">VAT</th>
     </tr>
   </thead>
   <tbody id="transactions">
