@@ -39,7 +39,7 @@
   <td class="hidden sm:table-cell">
     <%= transaction.vat if transaction.vatable? %>
   </td>
-  <td class="text-right py-1 hidden sm:table-cell">
+  <td class="text-right py-1 hidden sm:table-cell whitespace-nowrap">
 
     <%= unless transaction.xero_uuid
       button_to "+",
