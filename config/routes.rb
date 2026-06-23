@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :transactions, except: %i[new create]
+  resources :transactions, except: %i[new create] do
+    member do
+      patch :duplicate
+    end
+  end
+
   resource :session
   namespace :api do
     namespace :v001 do

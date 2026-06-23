@@ -1,9 +1,9 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: %i[ show edit update destroy ]
+  before_action :set_transaction, only: %i[ show edit update destroy duplicate ]
 
-  load_and_authorize_resource :mission, parent_action: :update, only: [:new, :create]
+  load_and_authorize_resource :mission, parent_action: :update, only: [ :new, :create ]
   load_and_authorize_resource :transaction, through: :mission, shallow: true
-  load_and_authorize_resource only: [:update, :destroy]
+  load_and_authorize_resource only: [ :update, :destroy ]
   # GET /transactions or /transactions.json
   def index
     @transactions = Transaction.all
@@ -17,7 +17,7 @@ class TransactionsController < ApplicationController
   def new
     @mission = Mission.find(params[:mission_id])
     @transaction = @mission.transactions.build
-    @path = [@mission, @transaction]
+    @path = [ @mission, @transaction ]
   end
 
   # GET /transactions/1/edit
@@ -37,12 +37,19 @@ class TransactionsController < ApplicationController
       else
         format.html { render :new, status: :unprocessable_content }
         format.turbo_stream do
-          @path = [@mission, @transaction]
+          @path = [ @mission, @transaction ]
           render :new
         end
         format.json { render json: @transaction.errors, status: :unprocessable_content }
       end
     end
+  end
+
+  def duplicate
+    transaction__new = @transaction.dup
+  transaction__new.transaction_at = transaction__new.transaction_at + 1.month
+    transaction__new.save!
+  redirect_to @transaction.mission
   end
 
   # PATCH/PUT /transactions/1 or /transactions/1.json
@@ -81,6 +88,6 @@ class TransactionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def transaction_params
-    params.expect(transaction: [:transaction_at, :why, :amount, :operation, :business_account_balance, :vatable, :vat, :mission_id])
+    params.expect(transaction: [ :transaction_at, :why, :amount, :operation, :business_account_balance, :vatable, :vat, :mission_id ])
   end
 end

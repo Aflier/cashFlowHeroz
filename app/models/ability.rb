@@ -39,7 +39,7 @@ class Ability
       end
 
       # Transaction permissions: responsible and contributor can create
-      can [ :new, :create, :show ], Transaction do |transaction|
+      can [ :new, :create, :show, :duplicate ], Transaction do |transaction|
         transaction.mission.mission_users.find_by(user: user, role: [ :responsible, :contributor ])
       end
 

@@ -40,6 +40,14 @@
     <%= transaction.vat if transaction.vatable? %>
   </td>
   <td class="text-right py-1 hidden sm:table-cell">
+
+    <%= unless transaction.xero_uuid
+      button_to "+",
+      duplicate_transaction_path(transaction),
+      method: :patch,
+      class: "btn-edit-sm"
+    end %>
+
     <%= link_to icons__edit,
     edit_transaction_path(transaction),
     class: "btn-edit-sm",
