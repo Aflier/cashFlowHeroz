@@ -42,19 +42,19 @@
   <td class="text-right py-1 hidden sm:table-cell whitespace-nowrap">
 
     <%= unless transaction.xero_uuid or transaction.child
-      button_to "+1",
+      button_to "1",
       duplicate_transaction_path(transaction, months: 1),
       method: :patch,
       class: "btn-edit-sm"
     end %>
     <%= unless transaction.xero_uuid or transaction.child
-      button_to "+3",
+      button_to "3",
       duplicate_transaction_path(transaction, months: 3),
       method: :patch,
       class: "btn-edit-sm"
     end %>
     <%= unless transaction.xero_uuid or transaction.child
-      button_to "+12",
+      button_to "12",
       duplicate_transaction_path(transaction, months: 12),
       method: :patch,
       class: "btn-edit-sm"
