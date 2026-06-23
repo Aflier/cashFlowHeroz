@@ -1,6 +1,12 @@
 class Transaction < ApplicationRecord
   belongs_to :mission
 
+  belongs_to :parent, class_name: "Transaction", optional: true
+
+  # The opposite side of the relationship
+  has_one :child, class_name: "Transaction", foreign_key: "parent_id"
+
+
   enum :operation, { in: 1, out: 2, correction: 3 }
 
   validates :transaction_at, :operation, :amount, presence: true

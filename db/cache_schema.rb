@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_12_100032) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_23_114957) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -254,6 +254,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_12_100032) do
     t.decimal "cumulative_total"
     t.bigint "mission_id", null: false
     t.integer "operation"
+    t.bigint "parent_id"
     t.text "raw"
     t.date "transaction_at"
     t.datetime "updated_at", null: false
@@ -262,6 +263,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_12_100032) do
     t.string "why"
     t.string "xero_uuid"
     t.index ["mission_id"], name: "index_transactions_on_mission_id"
+    t.index ["parent_id"], name: "index_transactions_on_parent_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -292,4 +294,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_12_100032) do
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "transactions", "missions"
+  add_foreign_key "transactions", "transactions", column: "parent_id"
 end

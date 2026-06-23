@@ -47,9 +47,11 @@ class TransactionsController < ApplicationController
 
   def duplicate
     transaction__new = @transaction.dup
-  transaction__new.transaction_at = transaction__new.transaction_at + 1.month
+    transaction__new.transaction_at = transaction__new.transaction_at + 1.month
+    transaction__new.parent_id = @transaction.id
     transaction__new.save!
-  redirect_to @transaction.mission
+
+    redirect_to @transaction.mission
   end
 
   # PATCH/PUT /transactions/1 or /transactions/1.json
