@@ -41,7 +41,7 @@
   </td>
   <td class="text-right py-1 hidden sm:table-cell whitespace-nowrap">
 
-    <% if transaction.xero_uuid.blank? or transaction.child.nil? %>
+    <% if transaction.xero_uuid.blank? and transaction.child.nil? %>
       <%= button_to "1",
       duplicate_transaction_path(transaction, months: 1),
       method: :patch,
