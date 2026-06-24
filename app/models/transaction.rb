@@ -4,7 +4,7 @@ class Transaction < ApplicationRecord
   belongs_to :parent, class_name: "Transaction", optional: true
 
   # The opposite side of the relationship
-  has_one :child, class_name: "Transaction", foreign_key: "parent_id"
+  has_one :child, class_name: "Transaction", foreign_key: "parent_id", dependent: :nullify
 
 
   enum :operation, { in: 1, out: 2, correction: 3 }
