@@ -8,6 +8,7 @@
 >
   <td class="py-1">
     <%= link_to transaction.transaction_at.strftime("%d %b"), transaction %>
+    <%= transaction.status %>
   </td>
   <td class="hidden sm:table-cell">
     <%= transaction.why %>
