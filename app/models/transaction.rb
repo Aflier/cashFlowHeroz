@@ -42,6 +42,7 @@ class Transaction < ApplicationRecord
           cumulative_total = cumulative_total + transaction.amount
         else
           next if transaction.amount.nil?
+          next if cumulative_total.nil?
 
           cumulative_total = cumulative_total - transaction.amount
         end
