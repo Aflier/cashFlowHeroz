@@ -41,6 +41,8 @@ class Transaction < ApplicationRecord
         if transaction.in? || transaction.correction?
           cumulative_total = cumulative_total + transaction.amount
         else
+          next if transaction.amount.nil?
+
           cumulative_total = cumulative_total - transaction.amount
         end
       end
