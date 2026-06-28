@@ -1,10 +1,13 @@
-<tr class="sm:hidden <%= "paid-transaction" if transaction.status == "PAID" %>">
-  <td class="py-1" colspan="5"><%= transaction.why %></td>
+<tr class="sm:hidden">
+  <td
+    class="py-1 <%= "paid-transaction" if transaction.status == "PAID" %>"
+    colspan="5"
+  ><%= transaction.why %></td>
 </tr>
 
 <tr
-  id="<%= dom_id transaction %> <%= "paid-transaction" if transaction.status == "PAID" %>"
-  class="border-b-2"
+  id="<%= dom_id transaction %>"
+  class="border-b-2 <%= "paid-transaction" if transaction.status == "PAID" %>"
 >
   <td class="py-1">
     <%= link_to transaction.transaction_at.strftime("%d %b"), transaction %>
