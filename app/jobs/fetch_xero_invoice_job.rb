@@ -47,7 +47,7 @@ class FetchXeroInvoiceJob < ApplicationJob
 
     transaction = token_record.transactions.find_or_create_by!(xero_uuid: invoice.invoice_id) do |transaction|
       transaction.amount = invoice.total
-      transaction.operation = 1
+      transaction.operation = (invoice.type == "ACCREC" ? 1 : 2)
       transaction.transaction_at = invoice_due_date
       transaction.raw = invoice.to_s
     end
