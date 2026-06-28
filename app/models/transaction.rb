@@ -38,11 +38,12 @@ class Transaction < ApplicationRecord
         # Trust the first one.
         cumulative_total = transaction.cumulative_total
       else
+        next if transaction.amount.nil?
+        next if cumulative_total.nil?
+
         if transaction.in? || transaction.correction?
           cumulative_total = cumulative_total + transaction.amount
         else
-          next if transaction.amount.nil?
-          next if cumulative_total.nil?
 
           cumulative_total = cumulative_total - transaction.amount
         end
