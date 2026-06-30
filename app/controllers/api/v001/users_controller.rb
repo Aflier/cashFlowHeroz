@@ -1,6 +1,6 @@
 class Api::V001::UsersController < Api::V001::BaseController
   skip_before_action :verify_authenticity_token
-  allow_unauthenticated_access only: %i[ add_connection refresh_connection remove_connector ]
+  allow_unauthenticated_access only: %i[ add_connection refresh_connection remove_connector slice ]
 
   def add_connection
     user = User.find_by(uid: params[:id])
@@ -46,5 +46,17 @@ class Api::V001::UsersController < Api::V001::BaseController
       user.update_node(connector_instance) if connector_instance
     end
     render json: { status: :ok }
+  end
+
+  def slice
+    user = User.find_by(uid: params[:id])
+
+    if user&.mission_users&.any?
+      slice = :CFH
+    else
+      slice = nil
+    end
+
+    render json: { slice: slice }
   end
 end

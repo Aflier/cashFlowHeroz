@@ -15,8 +15,10 @@ module ApplicationHelper
     end
   end
 
-  def suite_links
-    response = RestClient.get("#{$sso_url}/api/v001/suite_links")
+  def suite_links(user)
+    url = "#{$sso_url}/api/v001/suite_links"
+    url = "#{$sso_url}/api/v001/users/#{user.uid}/slices" if user
+    response = RestClient.get(url)
     response = JSON.parse(response)
     response['links']
   end

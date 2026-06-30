@@ -16,6 +16,7 @@ Rails.application.routes.draw do
           post :add_connection
           patch :refresh_connection
           patch :remove_connector
+          get :slice
         end
       end
     end
