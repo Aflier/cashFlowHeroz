@@ -1,3 +1,9 @@
 .paid-transaction td {
   @apply bg-green-100;
 }
+
+
+.deleted-transaction td {
+
+  @apply bg-red-100;
+}
