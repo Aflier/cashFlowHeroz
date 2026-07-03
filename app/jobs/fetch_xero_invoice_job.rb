@@ -48,11 +48,9 @@ class FetchXeroInvoiceJob < ApplicationJob
     transaction = token_record.transactions.find_or_create_by!(xero_uuid: invoice.invoice_id) do |transaction|
       transaction.amount = invoice.total
       transaction.operation = (invoice.type == "ACCREC" ? 1 : 2)
-      transaction.transaction_at = invoice_due_date
-      transaction.raw = invoice.to_s
     end
 
-    transaction.update(transaction_at: invoice_due_date, why: "#{invoice.invoice_number} - #{invoice.contact.name}", status: invoice.status)
+    transaction.update(transaction_at: invoice_due_date, why: "#{invoice.invoice_number} - #{invoice.contact.name}", status: invoice.status, raw: invoice.to_s)
 
     transaction.calculate_cumulative_total
 
