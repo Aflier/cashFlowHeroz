@@ -2,11 +2,12 @@ module ApplicationHelper
   def btn_logout
     return unless authenticated?
 
-    button_to icons__sign_out,
-              logout_path,
+    button_to logout_path,
               method: :delete,
               data: { turbo: false },
-              class: "pw-full sm:w-auto rounded-md px-3.5 py-2.5 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer"
+              class: "px-1 fa-2x  sm:flex no-underline" do
+      raw("#{icons__sign_out} Sign Out")
+    end
   end
 
   def bootstrap__close_modal
