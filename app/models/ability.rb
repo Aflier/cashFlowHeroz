@@ -11,7 +11,7 @@ class Ability
       can [ :index ], LegalEntity
       can [ :index ], Mission
       can [ :connector_preview, :update_connecting, :refresh_connection, :remove_connector,
-           :update_connector ], User do |user__observing|
+           :update_connector, :slices ], User do |user__observing|
         user.id == user__observing.id
       end
       # LegalEntity permissions: responsible and contributor can view

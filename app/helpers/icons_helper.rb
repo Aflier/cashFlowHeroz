@@ -1,4 +1,8 @@
 module IconsHelper
+  def icons__reception_heroz
+    raw '<i class="fa-light fa-user-gear fa-fw text-black"></i>'
+  end
+
   def icons__survey
     raw '<i class="fa-light fa-clipboard-list-check"></i>'
   end

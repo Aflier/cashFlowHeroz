@@ -1,7 +1,2 @@
-<%# if @mission&.persisted? %>
-<%#= raw @mission.suite_links %>
-<%# else %>
-<%#= raw suite_links(current_user) %>
-<%# end %>
-
-<%= raw suite_links(current_user) %>
+<%= link_to icons__reception_heroz, slices_user_path(current_user),
+            data: { turbo_frame: :api_slider }, class: "px-1 fa-2x sm:flex no-underline" %>

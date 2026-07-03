@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       get :connector_preview
       delete :remove_connector
       patch :update_connector
+      get :slices
     end
   end
 

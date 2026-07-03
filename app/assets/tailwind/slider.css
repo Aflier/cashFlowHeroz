@@ -1,0 +1,52 @@
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.animate-drawer-in {
+    animation: slideInLeft 0.4s ease-out forwards;
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.animate-drawer-out {
+    animation: slideOutLeft 0.4s ease-out forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%); /* Positive 100% pushes it to the right */
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.animate-drawer-right-in {
+    animation: slideInRight 0.4s ease-out forwards;
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.animate-drawer-right-out {
+    animation: slideOutRight 0.4s ease-out forwards;
+}

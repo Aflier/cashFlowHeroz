@@ -67,6 +67,7 @@
       <main class="flex-1 ml-0 sm:ml-20 p-5 pt-10 overflow-y-auto">
         <%= yield %>
         <%= turbo_frame_tag :remote_modal %>
+        <%= turbo_frame_tag :api_slider %>
       </main>
     </div>
     <% if notice.present? %>

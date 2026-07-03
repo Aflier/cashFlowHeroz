@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 @import "./cash_heroz.css" layer(components);
+@import "./slider.css" layer(components);
 
 @layer base {
 
