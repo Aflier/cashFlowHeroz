@@ -51,7 +51,8 @@ class FetchXeroInvoiceJob < ApplicationJob
       transaction.transaction_at = invoice_due_date # We need this here to pass validation
     end
 
-    transaction.update(transaction_at: invoice_due_date, why: "#{invoice.invoice_number} - #{invoice.contact.name}", status: invoice.status, raw: invoice.to_s)
+    transaction.update(transaction_at: invoice_due_date, why: "#{invoice.invoice_number} - #{invoice.contact.name}", status: invoice.status, raw: invoice.to_s,
+      amount: invoice.total)
 
     transaction.calculate_cumulative_total
 
