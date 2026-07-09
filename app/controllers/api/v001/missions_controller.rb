@@ -7,7 +7,9 @@ class Api::V001::MissionsController < Api::V001::BaseController
       new_legal_entity.name = params[:legal_entity][:name]
     end
 
-    mission = legal_entity.missions.create(mission_params)
+    mission = legal_entity.missions.find_or_create_by(sso_uuid: params[:mission][:sso_uuid]) do |new_mission|
+      new_mission.name = params[:mission][:name]
+    end
     if mission
       user = User.find_or_create_by!(email_address: params[:user][:email]) do |user|
         user.password = 'password-secret'
