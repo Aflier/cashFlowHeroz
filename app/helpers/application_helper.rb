@@ -10,7 +10,7 @@ module ApplicationHelper
     end
   end
 
-  def bootstrap__close_modal
+  def close_modal
     turbo_stream.replace :remote_modal do
       turbo_frame_tag :remote_modal
     end

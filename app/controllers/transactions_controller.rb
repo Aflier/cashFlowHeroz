@@ -48,7 +48,7 @@ class TransactionsController < ApplicationController
   def duplicate
     @transaction.duplicate_for_next
 
-    redirect_to @transaction.mission
+    redirect_to mission_path(@transaction.mission, page: params[:page])
   end
 
   # PATCH/PUT /transactions/1 or /transactions/1.json
@@ -57,6 +57,7 @@ class TransactionsController < ApplicationController
       if @transaction.update(transaction_params)
         @transaction.calculate_cumulative_total
         format.html { redirect_to @transaction.mission, notice: "Transaction was successfully updated.", status: :see_other }
+        format.turbo_stream
         format.json { render :show, status: :ok, location: @transaction }
       else
         format.html { render :edit, status: :unprocessable_content }

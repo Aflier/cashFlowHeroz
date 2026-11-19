@@ -3,7 +3,7 @@ module TransactionsHelper
     return unless transaction.occurance
 
     button_to icons__duplicate,
-              duplicate_transaction_path(transaction),
+              duplicate_transaction_path(transaction, page: params[:page]),
               method: :patch,
               class: "btn-edit-sm"
   end
