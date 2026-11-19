@@ -13,4 +13,9 @@ class Mission < ApplicationRecord
   #   response = JSON.parse(response)
   #   response['slices']
   # end
+
+
+  def starting_balance
+    banks.sum(:current_balance)
+  end
 end

@@ -20,13 +20,11 @@ class Transaction < ApplicationRecord
     # Make sure the first transaction is always what it should be
     transaction__first = mission.transactions.ordered.first
 
-    if transaction__first.cumulative_total.nil?
       if transaction__first.in? || transaction__first.correction?
-        transaction__first.update(cumulative_total: transaction__first.amount)
+        transaction__first.update(cumulative_total: mission.starting_balance + transaction__first.amount)
       else
-        transaction__first.update(cumulative_total: - transaction__first.amount)
+        transaction__first.update(cumulative_total: mission.starting_balance - transaction__first.amount)
       end
-    end
 
     day_before = transaction_at.yesterday
     ordered_transactions = mission.transactions.ordered.where(transaction_at: day_before..)
