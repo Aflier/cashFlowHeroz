@@ -1,0 +1,38 @@
+<tr id="<%= dom_id creditor %>" class="w-full sm:w-auto my-5 space-y-5">
+  <td>
+    <%= creditor.name %>
+  </td>
+  <td>
+    <%= creditor.starting_balance %>
+  </td>
+  <td>
+    <%= creditor.starting_balance_on %>
+  </td>
+  <td>
+    <%= creditor.current_balance %>
+  </td>
+  <td>
+    <%= creditor.current_balance_on %>
+  </td>
+  <td>
+    <%= creditor.monthly_payment %>
+  </td>
+  <td class="space-y-2 text-right ">
+    <%= link_to "Show",
+    creditor,
+    class:
+      "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+    <%= link_to "Edit",
+    edit_creditor_path(creditor),
+    class:
+      "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+    <%= button_to "Destroy",
+    creditor,
+    method: :delete,
+    class:
+      "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer",
+    data: {
+      turbo_confirm: "Are you sure?",
+    } %>
+  </td>
+</tr>

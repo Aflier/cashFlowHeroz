@@ -1,4 +1,12 @@
 module IconsHelper
+  def icons__bank
+    raw '<i class="fa-light fa-building-columns"></i>'
+  end
+
+  def icons__creditor
+    raw '<i class="fa-light fa-credit-card"></i>'
+  end
+
   def icons__reception_heroz
     raw '<i class="fa-light fa-user-gear fa-fw text-black"></i>'
   end

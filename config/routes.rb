@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :creditors
+  resources :banks
   resources :transactions, except: %i[new create] do
     member do
       patch :duplicate
@@ -39,6 +41,8 @@ Rails.application.routes.draw do
   resources :missions do
     resources :mission_users, only: %i[new create], shallow: true
     resources :transactions, only: %i[new create], shallow: true
+    resources :banks, shallow: true
+    resources :creditors, shallow: true
     member do
       get :connectors
     end

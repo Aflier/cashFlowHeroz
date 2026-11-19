@@ -4,6 +4,8 @@ class Mission < ApplicationRecord
   has_many :mission_users
   has_many :users, through: :mission_users
   has_many :transactions
+  has_many :banks
+  has_many :creditors
 
   # def suite_links
   #   return if sso_uuid.blank?

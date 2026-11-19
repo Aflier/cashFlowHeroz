@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_03_090752) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_19_104247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -51,6 +51,31 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_03_090752) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "banks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.decimal "current_balance"
+    t.date "current_balance_on"
+    t.bigint "mission_id", null: false
+    t.string "name"
+    t.decimal "starting_balance"
+    t.date "starting_balance_on"
+    t.datetime "updated_at", null: false
+    t.index ["mission_id"], name: "index_banks_on_mission_id"
+  end
+
+  create_table "creditors", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.decimal "current_balance"
+    t.date "current_balance_on"
+    t.bigint "mission_id", null: false
+    t.decimal "monthly_payment"
+    t.string "name"
+    t.decimal "starting_balance"
+    t.date "starting_balance_on"
+    t.datetime "updated_at", null: false
+    t.index ["mission_id"], name: "index_creditors_on_mission_id"
   end
 
   create_table "entity_users", force: :cascade do |t|
@@ -283,6 +308,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_03_090752) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "banks", "missions"
+  add_foreign_key "creditors", "missions"
   add_foreign_key "entity_users", "legal_entities"
   add_foreign_key "entity_users", "users"
   add_foreign_key "mission_users", "missions"
