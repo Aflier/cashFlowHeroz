@@ -6,9 +6,8 @@ class Transaction < ApplicationRecord
   # The opposite side of the relationship
   has_one :child, class_name: "Transaction", foreign_key: "parent_id", dependent: :nullify
 
-
   enum :operation, { in: 1, out: 2, correction: 3 }
-  enum :occurance, { weekly: 1, monthly: 2, quarterly: 3, anuually: 4 }
+  enum :occurance, { weekly: 1, monthly: 2, quarterly: 3, annually: 4 }
 
   validates :transaction_at, :operation, :amount, presence: true
 
@@ -21,11 +20,11 @@ class Transaction < ApplicationRecord
     # Make sure the first transaction is always what it should be
     transaction__first = mission.transactions.ordered.first
 
-      if transaction__first.in? || transaction__first.correction?
-        transaction__first.update(cumulative_total: mission.starting_balance + transaction__first.amount)
-      else
-        transaction__first.update(cumulative_total: mission.starting_balance - transaction__first.amount)
-      end
+    if transaction__first.in? || transaction__first.correction?
+      transaction__first.update(cumulative_total: mission.starting_balance + transaction__first.amount)
+    else
+      transaction__first.update(cumulative_total: mission.starting_balance - transaction__first.amount)
+    end
 
     day_before = transaction_at.yesterday
     ordered_transactions = mission.transactions.ordered.where(transaction_at: day_before..)
@@ -40,16 +39,35 @@ class Transaction < ApplicationRecord
         next if transaction.amount.nil?
         next if cumulative_total.nil?
 
-        if transaction.in? || transaction.correction?
-          cumulative_total = cumulative_total + transaction.amount
-        else
+        cumulative_total = if transaction.in? || transaction.correction?
+                             cumulative_total + transaction.amount
+                           else
 
-          cumulative_total = cumulative_total - transaction.amount
-        end
+                             cumulative_total - transaction.amount
+                           end
       end
 
-    transaction.update(cumulative_total: cumulative_total)
+      transaction.update(cumulative_total: cumulative_total)
     end
+  end
+
+  def duplicate_for_next
+    transaction__new = dup
+
+    puts ">>>> Occurance"
+    case occurance
+    when "weekly"
+      transaction__new.transaction_at = transaction__new.transaction_at + 1.week
+    when "monthly"
+      transaction__new.transaction_at = transaction__new.transaction_at + 1.month
+    when "quarterly"
+      transaction__new.transaction_at = transaction__new.transaction_at + 3.months
+    when "annually"
+      transaction__new.transaction_at = transaction__new.transaction_at + 12.months
+    end
+
+    transaction__new.parent_id = id
+    transaction__new.save!
   end
 
   private
@@ -61,8 +79,9 @@ class Transaction < ApplicationRecord
   def calculate_vat
     return nil unless vatable?
     return nil if amount.blank?
+
     self.vat = (amount / 6).round(2)
 
-  self.cumulative_total = nil
+    self.cumulative_total = nil
   end
 end

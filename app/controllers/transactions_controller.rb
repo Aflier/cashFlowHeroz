@@ -46,10 +46,7 @@ class TransactionsController < ApplicationController
   end
 
   def duplicate
-    transaction__new = @transaction.dup
-    transaction__new.transaction_at = transaction__new.transaction_at + params[:months].to_i.month
-    transaction__new.parent_id = @transaction.id
-    transaction__new.save!
+    @transaction.duplicate_for_next
 
     redirect_to @transaction.mission
   end

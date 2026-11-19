@@ -258,6 +258,10 @@ module IconsHelper
     raw '<i class="fa-solid fa-circle-w"></i>'
   end
 
+  def icons__duplicate
+    raw '<i class="fa-thin fa-clone-plus"></i>'
+  end
+
   def icons__expand
     raw '<i class="fal fa-expand"></i>'
   end

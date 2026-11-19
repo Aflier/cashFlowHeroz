@@ -14,32 +14,12 @@ Layout/ArrayAlignment:
   Exclude:
     - 'app/models/ability.rb'
 
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
-Layout/EmptyLineAfterGuardClause:
-  Exclude:
-    - 'app/models/concerns/connector_model.rb'
-    - 'app/models/concerns/super_table_filter.rb'
-    - 'app/models/mission_user.rb'
-    - 'app/models/transaction.rb'
-
 # Offense count: 3
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EmptyLineBetweenMethodDefs, EmptyLineBetweenClassDefs, EmptyLineBetweenModuleDefs, DefLikeMacros, AllowAdjacentOneLineDefs, NumberOfEmptyLines.
 Layout/EmptyLineBetweenDefs:
   Exclude:
     - 'app/helpers/icons_helper.rb'
-
-# Offense count: 9
-# This cop supports safe autocorrection (--autocorrect).
-Layout/EmptyLines:
-  Exclude:
-    - 'app/controllers/xero_sessions_controller.rb'
-    - 'app/controllers/xero_webhooks_controller.rb'
-    - 'app/helpers/icons_helper.rb'
-    - 'app/jobs/fetch_xero_invoice_job.rb'
-    - 'app/models/mission.rb'
-    - 'app/models/transaction.rb'
 
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).
@@ -123,19 +103,6 @@ Layout/FirstHashElementIndentation:
 Layout/HashAlignment:
   Exclude:
     - 'app/jobs/fetch_xero_invoice_job.rb'
-
-# Offense count: 10
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: normal, indented_internal_methods
-Layout/IndentationConsistency:
-  Exclude:
-    - 'app/channels/application_cable/connection.rb'
-    - 'app/controllers/banks_controller.rb'
-    - 'app/controllers/creditors_controller.rb'
-    - 'app/controllers/passwords_controller.rb'
-    - 'app/controllers/xero_sessions_controller.rb'
-    - 'app/models/transaction.rb'
 
 # Offense count: 6
 # This cop supports safe autocorrection (--autocorrect).
@@ -305,12 +272,6 @@ Rails/I18nLocaleTexts:
     - 'app/mailers/passwords_mailer.rb'
 
 # Offense count: 1
-# Configuration parameters: IgnoreScopes.
-Rails/InverseOf:
-  Exclude:
-    - 'app/models/transaction.rb'
-
-# Offense count: 1
 Rails/LexicallyScopedActionFilter:
   Exclude:
     - 'app/controllers/missions_controller.rb'
@@ -389,15 +350,6 @@ Style/CommentAnnotation:
   Exclude:
     - 'app/helpers/connectors_helper.rb'
     - 'app/models/concerns/connector_model.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, SingleLineConditionsOnly, IncludeTernaryExpressions.
-# SupportedStyles: assign_to_condition, assign_inside_condition
-Style/ConditionalAssignment:
-  Exclude:
-    - 'app/controllers/api/v001/users_controller.rb'
-    - 'app/models/transaction.rb'
 
 # Offense count: 47
 # Configuration parameters: AllowedConstants.
@@ -485,14 +437,6 @@ Style/Next:
     - 'app/controllers/xero_webhooks_controller.rb'
 
 # Offense count: 1
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle, AllowedMethods, AllowedPatterns.
-# SupportedStyles: predicate, comparison
-Style/NumericPredicate:
-  Exclude:
-    - 'app/models/transaction.rb'
-
-# Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowedMethods.
 # AllowedMethods: infinite?, nonzero?
@@ -533,12 +477,6 @@ Style/RescueStandardError:
 Style/ReturnNilInPredicateMethodDefinition:
   Exclude:
     - 'app/models/mission_user.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Style/SelfAssignment:
-  Exclude:
-    - 'app/models/transaction.rb'
 
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
