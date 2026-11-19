@@ -1,0 +1,25 @@
+/* WARNING: Do not update this page, update in ActionHeroz and then copy the file here */
+
+.mission-badge {
+  @apply text-white bg-purple-800 p-2 text-3xl float-right;
+}
+
+.mission-badge-sm {
+  @apply mb-2 sm:mt-0 ml-1 px-2.5 py-1.5 bg-purple-800 text-white font-medium float-right hover:no-underline
+}
+
+.epic-card {
+  @apply bg-indigo-300 p-3 mb-1;
+}
+
+.bg-success-subtle {
+  @apply !bg-green-300
+}
+
+.story-bar {
+  @apply flex gap-1 whitespace-nowrap bg-purple-200 px-3 border-orange-100 items-center rounded-md p-1.5 mb-3;
+}
+
+.no-story-bar {
+  @apply flex gap-1 whitespace-nowrap bg-blue-200 px-3 border-orange-100 items-center rounded-md p-1.5 mb-3;
+}

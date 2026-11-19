@@ -5,7 +5,9 @@
       <%= "deleted-transaction" if transaction.status == "DELETED" %>
     "
     colspan="5"
-  ><%= transaction.why %></td>
+  ><%= transaction.why %>
+
+  </td>
 </tr>
 
 <tr
@@ -21,6 +23,7 @@
   <td class="hidden sm:table-cell">
     <%= raw icons__robot if transaction.xero_uuid %>
     <%= transaction.why %>
+    (<%= transaction.occurance %>)
   </td>
   <td class="text-right hidden sm:table-cell">
     <%= transaction.amount %>

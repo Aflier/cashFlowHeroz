@@ -1,0 +1,18 @@
+/* WARNING: Do not update this page, update in ActionHeroz and then copy the file here */
+
+.action-badge {
+  @apply text-white bg-blue-800 p-2 text-3xl float-right;
+}
+
+.action-badge-sm {
+  @apply mb-2 sm:mt-0 ml-1 px-2.5 py-1 bg-blue-800 text-white font-medium float-right hover:no-underline;
+}
+
+.action-badge-h1 {
+  @apply mb-2 sm:mt-0 ml-1 px-2.5 py-1.5 bg-blue-800 text-white font-medium float-right hover:no-underline;
+}
+
+.task,
+.comment {
+  @apply p-2 mb-2;
+}

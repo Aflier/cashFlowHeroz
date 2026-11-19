@@ -8,6 +8,7 @@ class Transaction < ApplicationRecord
 
 
   enum :operation, { in: 1, out: 2, correction: 3 }
+  enum :occurance, { weekly: 1, monthly: 2, quarterly: 3, anuually: 4 }
 
   validates :transaction_at, :operation, :amount, presence: true
 

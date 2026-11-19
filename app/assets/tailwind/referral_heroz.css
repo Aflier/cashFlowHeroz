@@ -1,0 +1,9 @@
+/* NOTE: Making changes hear could be lost as this file should be updated from the gem */
+
+.contact-badge {
+  @apply text-white bg-pink-900 p-2 text-3xl float-right;
+}
+
+.contact-badge-sm {
+  @apply mb-2 sm:mt-0 ml-1 px-2.5 py-1.5 bg-pink-900 text-white font-medium float-right hover:no-underline
+}

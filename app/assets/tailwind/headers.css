@@ -1,0 +1,21 @@
+/* NOTE: Making changes hear could be lost as this file should be updated from the gem */
+
+h1 {
+  @apply font-extrabold text-black text-4xl border-b-3 mb-3 pb-1 min-h-12;
+}
+
+h2 {
+  @apply font-extrabold text-black text-3xl border-b-3 mb-3 pb-1;
+}
+
+h3 {
+  @apply font-extrabold text-black text-2xl border-b-3 mb-3 pb-1;
+}
+
+p {
+  @apply mb-3;
+}
+
+blockquote {
+  @apply p-4 my-4 border-s-4 border-brand-primary bg-gray-200;
+}

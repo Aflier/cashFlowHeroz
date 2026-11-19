@@ -1,0 +1,42 @@
+<% options = {} if local_assigns[:options].nil? %>
+
+<div data-controller="tabs">
+
+  <% if options[:links] %>
+    <% options[:links].each do |link| %>
+      <div class="float-right">
+        <%= raw link[:path] %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <nav class="hidden sm:flex float-left">
+    <% options[:breadcrumbs].each_with_index do |breadcrumb, index| %>
+      <%= link_to raw("#{breadcrumb[:name]} #{icons__right}"), breadcrumb[:path], class: "my-1 text-lg  ml-3" %>
+    <% end if options[:breadcrumbs] %>
+  </nav>
+
+  <% tabs.each_with_index do |tab, index| %>
+    <%# TODO: Setting of the style to handle h1 needs to be in all slices! %>
+    <% header_style = ((options[:header] == 1 and index.zero?) ? "text-xl font-extrabold text-black md:text-4xl border-b-4 pb-4
+" : "border-b-4 my-1 text-lg pb-4 ml-3") %>
+    <button class="<%= header_style %>"
+            id="nav-<%= tab[:id].underscore %>-tab"
+            data-tabs-target="tab"
+            data-action="click->tabs#switch"
+            data-tabs-index-param="<%= index %>"
+            type="button">
+      <%= tab[:icon] %><%= tab[:name] %>
+    </button>
+  <% end %>
+
+  <div class="border-t-4 border-gray-200 pt-5" id="nav-tabContent" style="margin-top: -8px">
+    <% tabs.each_with_index do |tab, index| %>
+      <div data-tabs-target="panel"
+           class="<%= 'hidden' unless index.zero? %>"
+           id="nav-<%= tab[:id] %>" role="tabpanel" aria-labelledby="nav-home-tab">
+        <%= tab[:body] %>
+      </div>
+    <% end %>
+  </div>
+</div>

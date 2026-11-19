@@ -1,0 +1,38 @@
+/* WARNING: Do not update this page, update in ActionHeroz and then copy the file here */
+
+.alert-info {
+  @apply bg-gray-200 p-3 mb-3;
+}
+
+.card-circle {
+  @apply bg-emerald-50 hover:bg-emerald-200 p-3 mb-3;
+}
+
+.card-contact {
+  @apply bg-emerald-200 hover:bg-emerald-400 p-3 mb-3;
+}
+
+.card-legal-entity {
+  @apply bg-green-50 hover:bg-green-200 p-3 mb-3;
+}
+
+.card-mission {
+  @apply bg-purple-50 hover:bg-purple-200 p-3 mb-3;
+}
+
+.contacts-counter {
+  @apply bg-emerald-600 text-white p-1;
+}
+
+.green-glow {
+  @apply shadow-lg shadow-green-700;
+}
+
+.side-nav-item {
+  @apply block px-4 py-2 rounded transition hover:bg-slate-700 text-white;
+}
+
+.card-mission {
+  @apply bg-purple-50 hover:bg-purple-200 p-3 mb-3;
+}
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_19_104247) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_19_152025) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -54,26 +54,26 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_104247) do
   end
 
   create_table "banks", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.decimal "current_balance"
-    t.date "current_balance_on"
-    t.bigint "mission_id", null: false
     t.string "name"
     t.decimal "starting_balance"
     t.date "starting_balance_on"
+    t.decimal "current_balance"
+    t.date "current_balance_on"
+    t.bigint "mission_id", null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["mission_id"], name: "index_banks_on_mission_id"
   end
 
   create_table "creditors", force: :cascade do |t|
-    t.datetime "created_at", null: false
+    t.string "name"
+    t.decimal "starting_balance"
+    t.date "starting_balance_on"
     t.decimal "current_balance"
     t.date "current_balance_on"
     t.bigint "mission_id", null: false
     t.decimal "monthly_payment"
-    t.string "name"
-    t.decimal "starting_balance"
-    t.date "starting_balance_on"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["mission_id"], name: "index_creditors_on_mission_id"
   end
@@ -107,17 +107,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_104247) do
   end
 
   create_table "missions", force: :cascade do |t|
-    t.string "access_token"
     t.datetime "created_at", null: false
-    t.datetime "expires_at"
     t.bigint "legal_entity_id", null: false
     t.string "name"
-    t.string "refresh_token"
     t.string "sso_uuid"
-    t.string "tenant_id"
     t.datetime "updated_at", null: false
     t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.string "xero_webhook_key"
+    t.string "tenant_id"
+    t.string "access_token"
+    t.string "refresh_token"
+    t.datetime "expires_at"
     t.index ["legal_entity_id"], name: "index_missions_on_legal_entity_id"
   end
 
@@ -279,16 +279,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_104247) do
     t.decimal "cumulative_total"
     t.bigint "mission_id", null: false
     t.integer "operation"
-    t.boolean "paid"
-    t.bigint "parent_id"
-    t.text "raw"
-    t.string "status"
     t.date "transaction_at"
     t.datetime "updated_at", null: false
     t.decimal "vat"
     t.boolean "vatable"
     t.string "why"
+    t.text "raw"
     t.string "xero_uuid"
+    t.bigint "parent_id"
+    t.string "status"
+    t.boolean "paid"
+    t.integer "occurance"
     t.index ["mission_id"], name: "index_transactions_on_mission_id"
     t.index ["parent_id"], name: "index_transactions_on_parent_id"
   end

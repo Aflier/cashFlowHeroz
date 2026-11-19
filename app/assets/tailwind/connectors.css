@@ -1,0 +1,29 @@
+/* WARNING: Do not update this page, update in ActionHeroz and then copy the file here */
+
+.connector-outer {
+  @apply bg-blue-50 mb-3 p-3;
+}
+
+.bg-warning-subtle {
+  @apply !bg-orange-200;
+}
+
+.bg-success-subtle {
+  @apply !bg-green-200;
+}
+
+.end-open {
+  @apply !bg-red-100
+}
+
+.end-complete {
+  @apply !bg-green-100
+}
+
+.btn-slider {
+  @apply text-center rounded-md px-1.5 py-1 bg-blue-300 hover:bg-blue-200 text-black inline-block font-medium ml-1 float-end ml-1;
+}
+
+.btn-slider-rm {
+  @apply text-center rounded-md px-1.5 py-1 bg-red-300 hover:bg-red-200 text-black hidden sm:inline-block font-medium ml-1 float-end ml-1;
+}
