@@ -1,7 +1,7 @@
 <%= turbo_frame_tag :api_slider, target: :_top do %>
   <%= render 'shared/slider', title: 'HerozSuite', options: { direction: "right" } do %>
-    <!-- Profile dropdown -->
-    <%= btn_logout %>
-    <%= raw suite_links(@user) %>
+    <%= turbo_frame_tag :suite_links, target: :_top, src: suite_links_user_path(@user) do %>
+      <h3><%= icons__spinner %> Loading Links...</h3>
+    <% end %>
   <% end %>
 <% end %>

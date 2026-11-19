@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include UserSuite
   include ConnectorModel
   include SuperTableFilter
   has_secure_password

@@ -1,4 +1,5 @@
 class Mission < ApplicationRecord
+  include MissionSuite
   include Connectable
   belongs_to :legal_entity
   has_many :mission_users

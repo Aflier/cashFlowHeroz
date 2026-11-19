@@ -59,10 +59,10 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'connection_hero', path: '../connection_hero'
+  gem "heroz_suite", path: "../heroz_suite"
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
-  gem "survey_hero", path: "../survey_hero"
   gem "tailwindcss_costumes", path: "../tailwindcss_costumes"
   gem 'web-console'
 end

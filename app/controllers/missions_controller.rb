@@ -1,4 +1,5 @@
 class MissionsController < ApplicationController
+  include MissionSuiteControl
   include ConnectableControl
   before_action :set_mission, only: %i[ show edit connectors update ]
   load_and_authorize_resource

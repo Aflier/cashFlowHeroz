@@ -1,4 +1,5 @@
 class LegalEntitiesController < ApplicationController
+  include EntitySuiteControl
   before_action :set_legal_entity, only: %i[ show edit update destroy ]
   load_and_authorize_resource
 
