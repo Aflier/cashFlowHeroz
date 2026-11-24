@@ -3,7 +3,7 @@
 <%= link_to icons__edit, edit_mission_path(@mission), class: "btn-edit float-right" %>
 <%= link_to raw("#{icons__plus} Transaction"),
 new_mission_transaction_path(@mission),
-class: "btn-edit float-right",
+class: "btn-new float-right ml-1",
 data: {
   turbo_frame: :remote_modal,
 } %>
