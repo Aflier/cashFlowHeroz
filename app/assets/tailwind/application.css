@@ -4,8 +4,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./action_heroz.css" layer(components);
 @import "./cash_heroz.css" layer(components);
+@import "./connectors.css" layer(components);
+@import "./crud_buttons.css" layer(components);
 @import "./slider.css" layer(components);
+@import "./suite_utilities.css";
+
+
+@theme {
+  --color-brand-primary: var(--color-green-900);
+  --color-brand-subtle: var(--color-green-300);
+  --color-brand-active: var(--color-green-700);
+}
 
 @layer base {
 

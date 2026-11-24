@@ -37,8 +37,8 @@
       <!-- Sidebar -->
       <aside
         class="
-          w-20 hidden sm:flex bg-slate-800 text-white flex flex-col fixed inset-y-0 top-16
-          fa-2x
+          w-20 hidden sm:flex bg-brand-primary text-white flex flex-col fixed inset-y-0
+          top-16 fa-2x
         "
       >
         <nav class="flex-1 px-1 py-4 space-y-2 overflow-y-auto">
@@ -57,23 +57,38 @@
             )
           end %>
 
-          <%= if can? :show, Mission and @mission
-            link_to(
-              icons__bank,
-              mission_banks_path(@mission),
-              class: "block px-4 py-2 rounded transition hover:bg-slate-700 text-white",
-              title: "Missions",
-            )
-          end %>
+          <% if @mission %>
+            <hr>
 
-          <%= if can? :show, Mission and @mission
-            link_to(
-              icons__creditor,
-              mission_creditors_path(@mission),
-              class: "block px-4 py-2 rounded transition hover:bg-slate-700 text-white",
-              title: "Missions",
-            )
-          end %>
+            <%= if can? :show, Mission
+              link_to(
+                icons__mission,
+                @mission,
+                class:
+                  "block px-4 py-2 rounded transition hover:bg-slate-700 text-white bg-brand-active",
+                title: "Missions",
+              )
+            end %>
+
+            <%= if can? :show, Mission
+              link_to(
+                icons__bank,
+                mission_banks_path(@mission),
+                class: "block px-4 py-2 rounded transition hover:bg-slate-700 text-white",
+                title: "Missions",
+              )
+            end %>
+
+            <%= if can? :show, Mission
+              link_to(
+                icons__creditor,
+                mission_creditors_path(@mission),
+                class: "block px-4 py-2 rounded transition hover:bg-slate-700 text-white",
+                title: "Missions",
+              )
+            end %>
+            <hr>
+          <% end %>
 
           <%= render "layouts/connector/connector_fetch" %>
         </nav>
