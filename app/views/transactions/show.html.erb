@@ -2,64 +2,61 @@
 
 <h1 class="font-bold text-4xl">Showing transaction</h1>
 
-<div class="md:w-2/3 w-full">
+<div>Xero UUID</div>
+<%= @transaction.xero_uuid %>
 
-  <div>Xero UUID</div>
-  <%= @transaction.xero_uuid %>
-
-  <div class="border-2 border-grey-800 mb-3">
-    <%= pp @transaction.raw %>&nbsp;
-  </div>
-  <h1>Transactions</h1>
-  <table>
-    <thead>
-      <tr>
-        <th class="w-[60px]">Date</th>
-        <th class="hidden sm:table-cell">Why</th>
-        <th class="text-right hidden sm:table-cell w-21">Amount (Inc. VAT)</th>
-        <th class="text-right w-21">In</th>
-        <th class="text-right w-21">Out</th>
-        <th class="text-right hidden sm:table-cell w-22">Business Account Balance</th>
-        <th class="text-right sm:hidden">Balance</th>
-        <th class="hidden sm:table-cell">VATable?</th>
-        <th class="text-right hidden sm:table-cell">VAT</th>
-      </tr>
-    </thead>
-    <tbody id="transactions">
-      <%= render @transaction.vat_transactions %>
-    </tbody>
-    <thead>
-      <tr>
-        <th class="w-[60px]"></th>
-        <th class="hidden sm:table-cell"></th>
-        <th class="text-right hidden sm:table-cell w-21"></th>
-        <th class="text-right w-21"></th>
-        <th class="text-right w-21"></th>
-        <th class="text-right hidden sm:table-cell w-22"></th>
-        <th class="text-right sm:hidden"></th>
-        <th class="hidden sm:table-cell"></th>
-        <th class="text-right hidden sm:table-cell"><%= @transaction.calculated_vat %></th>
-      </tr>
-    </thead>
-  </table>
-
-  <%= link_to "Edit this transaction",
-  edit_transaction_path(@transaction),
-  class:
-    "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to transactions",
-  transactions_path,
-  class:
-    "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= button_to "Destroy this transaction",
-  @transaction,
-  method: :delete,
-  form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2",
-  class:
-    "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer",
-  data: {
-    turbo_confirm: "Are you sure?",
-  } %>
+<div class="border-2 border-grey-800 mb-3">
+  <%= pp @transaction.raw %>&nbsp;
 </div>
-Parent:
-<%= @transaction.parent&.transaction_at %>
+<h1>Transactions</h1>
+<table>
+  <thead>
+    <tr>
+      <th class="w-[60px]">Date</th>
+      <th class="hidden sm:table-cell">Why</th>
+      <th class="text-right hidden sm:table-cell w-21">Amount (Inc. VAT)</th>
+      <th class="text-right w-21">In</th>
+      <th class="text-right w-21">Out</th>
+      <th class="text-right hidden sm:table-cell w-22">Business Account Balance</th>
+      <th class="text-right sm:hidden">Balance</th>
+      <th class="hidden sm:table-cell">VATable?</th>
+      <th class="text-right hidden sm:table-cell">VAT</th>
+    </tr>
+  </thead>
+  <tbody id="transactions">
+    <%= render @transaction.vat_transactions %>
+  </tbody>
+  <thead>
+    <tr>
+      <th class="w-[60px]"></th>
+      <th class="hidden sm:table-cell"></th>
+      <th class="text-right hidden sm:table-cell w-21"></th>
+      <th class="text-right w-21"></th>
+      <th class="text-right w-21"></th>
+      <th class="text-right hidden sm:table-cell w-22"></th>
+      <th class="text-right sm:hidden w-22"></th>
+      <th class="hidden sm:table-cell w-22"></th>
+      <th class="text-right hidden sm:table-cell w-22"><%= @transaction.calculated_vat %></th>
+      <th class="text-right hidden sm:table-cell w-22"></th>
+    </tr>
+  </thead>
+</table>
+
+<%= link_to "Edit this transaction",
+edit_transaction_path(@transaction),
+class:
+  "w
+-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+<%= link_to "Back to transactions",
+transactions_path,
+class:
+  "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+<%= button_to "Destroy this transaction",
+@transaction,
+method: :delete,
+form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2",
+class:
+  "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer",
+data: {
+  turbo_confirm: "Are you sure?",
+} %>
