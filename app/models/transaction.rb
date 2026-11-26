@@ -18,8 +18,7 @@ class Transaction < ApplicationRecord
   scope :ordered, -> { order(transaction_at: :asc, operation: :asc, created_at: :asc) }
 
   def calculated_vat
-    Transaction.where(transaction_at: (transaction_at - 4.months).beginning_of_month..(transaction_at - 2.months).end_of_month).previous.credit.sum(:vat) -
-      Transaction.where(transaction_at: (transaction_at - 4.months).beginning_of_month..(transaction_at - 2.months).end_of_month).previous.out.sum(:vat)
+    Transaction.where(transaction_at: (transaction_at - 4.months).beginning_of_month..(transaction_at - 2.months).end_of_month).previous.sum(:vat)
   end
 
   def calculate_cumulative_total
@@ -52,6 +51,7 @@ class Transaction < ApplicationRecord
 
                              cumulative_total - transaction.amount
                            end
+
       end
 
       transaction.update(cumulative_total: cumulative_total)
@@ -91,6 +91,8 @@ class Transaction < ApplicationRecord
   private
 
   def should_recalculate_vat?
+    return true
+
     will_save_change_to_amount? || will_save_change_to_vatable?
   end
 
@@ -99,6 +101,7 @@ class Transaction < ApplicationRecord
     return nil if amount.blank?
 
     self.vat = (amount / 6).round(2)
+    self.vat = -vat if out?
 
     self.cumulative_total = nil
   end
