@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_19_152025) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_26_115812) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -290,6 +290,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_152025) do
     t.string "status"
     t.boolean "paid"
     t.integer "occurance"
+    t.integer "ignore"
     t.index ["mission_id"], name: "index_transactions_on_mission_id"
     t.index ["parent_id"], name: "index_transactions_on_parent_id"
   end

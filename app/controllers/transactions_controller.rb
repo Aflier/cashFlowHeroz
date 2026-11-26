@@ -55,6 +55,8 @@ class TransactionsController < ApplicationController
   def update
     respond_to do |format|
       if @transaction.update(transaction_params)
+
+        @transaction.propogate_ignore
         @transaction.calculate_cumulative_total
         format.html { redirect_to @transaction.mission, notice: "Transaction was successfully updated.", status: :see_other }
         format.turbo_stream
@@ -88,7 +90,8 @@ class TransactionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def transaction_params
-    params.expect(transaction: [ :paid, :transaction_at, :why, :amount, :operation, :business_account_balance,
+    params.expect(transaction: [ :ignore,
+                                 :paid, :transaction_at, :why, :amount, :operation, :business_account_balance,
                                  :occurance,
                                  :vatable, :vat, :mission_id ])
   end

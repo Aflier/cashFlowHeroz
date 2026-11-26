@@ -8,4 +8,10 @@ module TransactionsHelper
               method: :patch,
               class: "btn-edit-sm"
   end
+
+  def transaction_classes(transaction)
+    return "bg-gray-200 text-gray-600" if transaction.ignore_this_and_after?
+
+    "paid-transaction" if transaction.status == "PAID" or transaction.paid
+  end
 end

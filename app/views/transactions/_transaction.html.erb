@@ -13,7 +13,7 @@
 <tr
   id="<%= dom_id transaction %>"
   class="
-    border-b-2 <%= "paid-transaction" if transaction.status == "PAID" or transaction.paid %>
+    border-b-2 <%= transaction_classes(transaction) %>
     <%= "deleted-transaction" if transaction.status == "DELETED" %>
   "
 >
@@ -29,7 +29,7 @@
     <%= transaction.amount %>
   </td>
   <td class="text-right text-green-500">
-    <% if transaction.in? %>
+    <% if transaction.credit? %>
       <%= transaction.amount %>
     <% elsif transaction.correction? and transaction.amount > 0 %>
       <%= transaction.amount %>

@@ -6,8 +6,9 @@ class Transaction < ApplicationRecord
   # The opposite side of the relationship
   has_one :child, class_name: "Transaction", foreign_key: "parent_id", dependent: :nullify
 
-  enum :operation, { in: 1, out: 2, correction: 3 }
-  enum :occurance, { weekly: 1, monthly: 2, quarterly: 3, annually: 4 }
+  enum :operation, { credit: 1, out: 2, correction: 3 }
+  enum :occurance, { no_repeat: nil, weekly: 1, monthly: 2, quarterly: 3, annually: 4 }
+  enum :ignore, { previous: nil, ignore_this_and_after: 1 }
 
   validates :transaction_at, :operation, :amount, presence: true
 
@@ -20,14 +21,14 @@ class Transaction < ApplicationRecord
     # Make sure the first transaction is always what it should be
     transaction__first = mission.transactions.ordered.first
 
-    if transaction__first.in? || transaction__first.correction?
+    if transaction__first.credit? || transaction__first.correction?
       transaction__first.update(cumulative_total: mission.starting_balance + transaction__first.amount)
     else
       transaction__first.update(cumulative_total: mission.starting_balance - transaction__first.amount)
     end
 
-    day_before = transaction_at.yesterday
-    ordered_transactions = mission.transactions.ordered.where(transaction_at: day_before..)
+    transaction_at.yesterday
+    ordered_transactions = mission.transactions.ordered # .where(transaction_at: day_before..) TODO:Make it so we are more intelligent
 
     cumulative_total = 0
 
@@ -36,10 +37,11 @@ class Transaction < ApplicationRecord
         # Trust the first one.
         cumulative_total = transaction.cumulative_total
       else
+        next if transaction.ignore_this_and_after?
         next if transaction.amount.nil?
         next if cumulative_total.nil?
 
-        cumulative_total = if transaction.in? || transaction.correction?
+        cumulative_total = if transaction.credit? || transaction.correction?
                              cumulative_total + transaction.amount
                            else
 
@@ -49,6 +51,14 @@ class Transaction < ApplicationRecord
 
       transaction.update(cumulative_total: cumulative_total)
     end
+  end
+
+  def propogate_ignore
+    return if child.nil?
+    return unless ignore_previously_changed?
+
+    child.update(ignore: ignore)
+    child.propogate_ignore
   end
 
   def duplicate_for_next
