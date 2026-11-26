@@ -52,7 +52,9 @@
     <%= transaction.vatable? ? "Yes" : "No" unless transaction.vatable.nil? %>
   </td>
   <td
-    class="hidden sm:table-cell <%= 'bg-blue-200' if transaction.vat_payment? %>"
+    class="
+      hidden sm:table-cell text-right <%= 'bg-blue-200' if transaction.vat_payment? %>
+    "
   >
     <% if transaction.vat_payment? %>
       <%= transaction.calculated_vat %>
