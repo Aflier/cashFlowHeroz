@@ -103,6 +103,8 @@ class Transaction < ApplicationRecord
     self.vat = (amount / 6).round(2)
     self.vat = -vat if out?
 
+    self.vat = 0.0 if vat_payment?
+
     self.cumulative_total = nil
   end
 end
