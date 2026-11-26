@@ -52,8 +52,14 @@
   <td class="hidden sm:table-cell">
     <%= transaction.vatable? ? "Yes" : "No" unless transaction.vatable.nil? %>
   </td>
-  <td class="hidden sm:table-cell">
-    <%= transaction.vat if transaction.vatable? %>
+  <td
+    class="hidden sm:table-cell <%= 'bg-blue-200' if transaction.vat_payment? %>"
+  >
+    <% if transaction.vat_payment? %>
+      <%= transaction.calculated_vat %>
+    <% else %>
+      <%= transaction.vat if transaction.vatable? %>
+    <% end %>
   </td>
   <td class="text-right py-1 hidden sm:table-cell whitespace-nowrap">
     <%= button_to_duplicate(transaction) %>

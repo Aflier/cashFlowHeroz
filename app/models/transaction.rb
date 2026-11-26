@@ -6,7 +6,7 @@ class Transaction < ApplicationRecord
   # The opposite side of the relationship
   has_one :child, class_name: "Transaction", foreign_key: "parent_id", dependent: :nullify
 
-  enum :operation, { credit: 1, out: 2, correction: 3 }
+  enum :operation, { credit: 1, out: 2, correction: 3, vat_payment: 4 }
   enum :occurance, { no_repeat: nil, weekly: 1, monthly: 2, quarterly: 3, annually: 4 }
   enum :ignore, { previous: nil, ignore_this_and_after: 1 }
 
@@ -16,6 +16,11 @@ class Transaction < ApplicationRecord
   # after_validation :calculate_cumulative_total
 
   scope :ordered, -> { order(transaction_at: :asc, operation: :asc, created_at: :asc) }
+
+  def calculated_vat
+    Transaction.where(transaction_at: 4.months.ago.beginning_of_month..2.months.ago.end_of_month).previous.credit.sum(:vat) -
+      Transaction.where(transaction_at: 4.months.ago.beginning_of_month..2.months.ago.end_of_month).previous.out.sum(:vat)
+  end
 
   def calculate_cumulative_total
     # Make sure the first transaction is always what it should be
