@@ -18,8 +18,8 @@ class Transaction < ApplicationRecord
   scope :ordered, -> { order(transaction_at: :asc, operation: :asc, created_at: :asc) }
 
   def calculated_vat
-    Transaction.where(transaction_at: 4.months.ago.beginning_of_month..2.months.ago.end_of_month).previous.credit.sum(:vat) -
-      Transaction.where(transaction_at: 4.months.ago.beginning_of_month..2.months.ago.end_of_month).previous.out.sum(:vat)
+    Transaction.where(transaction_at: (transaction_at - 4.months).beginning_of_month..(transaction_at - 2.months).end_of_month).previous.credit.sum(:vat) -
+      Transaction.where(transaction_at: (transaction_at - 4.months).beginning_of_month..(transaction_at - 2.months).end_of_month).previous.out.sum(:vat)
   end
 
   def calculate_cumulative_total
