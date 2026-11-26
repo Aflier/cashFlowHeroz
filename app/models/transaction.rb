@@ -8,7 +8,7 @@ class Transaction < ApplicationRecord
 
   enum :operation, { credit: 1, out: 2, correction: 3, vat_payment: 4 }
   enum :occurance, { no_repeat: nil, weekly: 1, monthly: 2, quarterly: 3, annually: 4 }
-  enum :ignore, { previous: nil, ignore_this_and_after: 1 }
+  enum :ignore, { dont: nil, ignore_this_and_after: 1 }
 
   validates :transaction_at, :operation, :amount, presence: true
 
@@ -104,7 +104,5 @@ class Transaction < ApplicationRecord
 
     self.vat = (amount / 6).round(2)
     self.vat = -vat if out?
-
-    self.cumulative_total = nil
   end
 end
