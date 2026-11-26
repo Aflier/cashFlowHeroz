@@ -23,7 +23,9 @@
   <td class="hidden sm:table-cell">
     <%= raw icons__robot if transaction.xero_uuid %>
     <%= transaction.why %>
-    (<%= transaction.occurance %>)
+    <% unless transaction.no_repeat? %>
+      (<%= transaction.occurance %>)
+    <% end %>
   </td>
   <td class="text-right hidden sm:table-cell">
     <%= transaction.amount %>
