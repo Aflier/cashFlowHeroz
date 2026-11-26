@@ -49,9 +49,6 @@
     class="text-right <%= 'bg-red-200' if (transaction.cumulative_total.nil? ? false : transaction.cumulative_total < 0) %>"
   ><%= transaction.cumulative_total %></td>
   <td class="hidden sm:table-cell">
-    <%= transaction.business_account_balance %>
-  </td>
-  <td class="hidden sm:table-cell">
     <%= transaction.vatable? ? "Yes" : "No" unless transaction.vatable.nil? %>
   </td>
   <td

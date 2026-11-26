@@ -10,8 +10,26 @@
   <div class="border-2 border-grey-800 mb-3">
     <%= pp @transaction.raw %>&nbsp;
   </div>
-
-  <%# render @transaction %>
+  <h1>Transactions</h1>
+  <%= paginate @transactions %>
+  <table>
+    <thead>
+      <tr>
+        <th class="w-[60px]">Date</th>
+        <th class="hidden sm:table-cell">Why</th>
+        <th class="text-right hidden sm:table-cell w-21">Amount (Inc. VAT)</th>
+        <th class="text-right w-21">In</th>
+        <th class="text-right w-21">Out</th>
+        <th class="text-right hidden sm:table-cell w-22">Business Account Balance</th>
+        <th class="text-right sm:hidden">Balance</th>
+        <th class="hidden sm:table-cell">VATable?</th>
+        <th class="text-right hidden sm:table-cell">VAT</th>
+      </tr>
+    </thead>
+    <tbody id="transactions">
+      <%= render @transactions.vat_transactions %>
+    </tbody>
+  </table>
 
   <%= link_to "Edit this transaction",
   edit_transaction_path(@transaction),
