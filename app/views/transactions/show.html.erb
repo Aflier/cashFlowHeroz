@@ -29,6 +29,19 @@
     <tbody id="transactions">
       <%= render @transactions.vat_transactions %>
     </tbody>
+    <thead>
+      <tr>
+        <th class="w-[60px]"></th>
+        <th class="hidden sm:table-cell"></th>
+        <th class="text-right hidden sm:table-cell w-21"></th>
+        <th class="text-right w-21"></th>
+        <th class="text-right w-21"></th>
+        <th class="text-right hidden sm:table-cell w-22"></th>
+        <th class="text-right sm:hidden"></th>
+        <th class="hidden sm:table-cell"></th>
+        <th class="text-right hidden sm:table-cell"><%= @transaction.calculated_vat %></th>
+      </tr>
+    </thead>
   </table>
 
   <%= link_to "Edit this transaction",
