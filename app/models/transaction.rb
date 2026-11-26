@@ -76,6 +76,9 @@ class Transaction < ApplicationRecord
       transaction__new.transaction_at = transaction__new.transaction_at + 12.months
     end
 
+    # NOTE: When we are repeating an invoice make sure the repeat does not look like a xero import
+    transaction__new.xero_uuid = nil
+
     transaction__new.parent_id = id
     transaction__new.save!
   end
