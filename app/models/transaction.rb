@@ -97,13 +97,13 @@ class Transaction < ApplicationRecord
   end
 
   def calculate_vat
+    self.vat = 0.0 if vat_payment?
+
     return nil unless vatable?
     return nil if amount.blank?
 
     self.vat = (amount / 6).round(2)
     self.vat = -vat if out?
-
-    self.vat = 0.0 if vat_payment?
 
     self.cumulative_total = nil
   end
