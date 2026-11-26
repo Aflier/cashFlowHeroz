@@ -12,6 +12,6 @@ module TransactionsHelper
   def transaction_classes(transaction)
     return "bg-gray-200 text-gray-600" if transaction.ignore_this_and_after?
 
-    "paid-transaction" if transaction.status == "PAID" or transaction.paid
+    "paid-transaction" if transaction.status == "PAID" || transaction.paid
   end
 end

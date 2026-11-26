@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v001 do
       resources :legal_entities do
-        resources :missions, only: [ :create ]
+        resources :missions, only: [:create]
       end
       resources :users do
         member do
@@ -25,19 +25,20 @@ Rails.application.routes.draw do
   end
 
   get "connectors", to: "connectors#index"
-  resources :users, only: [] do
+  resources :users do
     member do
       patch :update_connecting
       patch :refresh_connection
       get :connector_preview
       delete :remove_connector
       patch :update_connector
+      get :suite_links
       get :slices
     end
   end
 
   resources :legal_entities
-  resources :entity_users, only: [ :update ]
+  resources :entity_users, only: [:update]
   resources :missions do
     resources :mission_users, only: %i[new create], shallow: true
     resources :transactions, only: %i[new create], shallow: true
