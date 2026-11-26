@@ -1,6 +1,6 @@
 module TransactionsHelper
   def button_to_duplicate(transaction)
-    return unless transaction.occurance
+    return if transaction.no_repeat?
     return if transaction.child
 
     button_to icons__duplicate,
