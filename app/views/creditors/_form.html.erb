@@ -97,6 +97,9 @@
                           creditor.errors[:monthly_payment].any?,
                       },
                     ] %>
+
+    <%= form.label :notes %>
+    <%= form.rich_text_area :notes %>
   </div>
 
   <div class="inline">

@@ -61,13 +61,16 @@ class CreditorsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_creditor
-      @creditor = Creditor.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def creditor_params
-      params.expect(creditor: [ :name, :starting_balance, :starting_balance_on, :current_balance, :current_balance_on, :mission_id, :monthly_payment ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_creditor
+    @creditor = Creditor.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def creditor_params
+    params.expect(creditor: [ :name,
+                              :notes,
+                              :starting_balance, :starting_balance_on, :current_balance, :current_balance_on, :mission_id, :monthly_payment ])
+  end
 end

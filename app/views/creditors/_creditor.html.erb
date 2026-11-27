@@ -1,6 +1,6 @@
 <tr id="<%= dom_id creditor %>" class="w-full sm:w-auto my-5 space-y-5">
   <td>
-    <%= creditor.name %>
+    <%= link_to creditor.name, creditor %>
   </td>
   <td>
     <%= creditor.starting_balance %>
@@ -18,14 +18,6 @@
     <%= creditor.monthly_payment %>
   </td>
   <td class="space-y-2 text-right ">
-    <%= link_to "Show",
-    creditor,
-    class:
-      "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-    <%= link_to "Edit",
-    edit_creditor_path(creditor),
-    class:
-      "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
     <%= button_to "Destroy",
     creditor,
     method: :delete,

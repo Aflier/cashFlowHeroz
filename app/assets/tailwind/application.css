@@ -8,6 +8,7 @@
 @import "./cash_heroz.css" layer(components);
 @import "./connectors.css" layer(components);
 @import "./crud_buttons.css" layer(components);
+@import "./forms.css" layer(components);
 @import "./slider.css" layer(components);
 @import "./suite_utilities.css";
 
