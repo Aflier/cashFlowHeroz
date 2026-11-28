@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   resources :legal_entities
   resources :entity_users, only: [:update]
   resources :missions do
+    resource :card, only: [:show], module: :missions
     resources :mission_users, only: %i[new create], shallow: true
     resources :transactions, only: %i[new create], shallow: true
     resources :banks, shallow: true

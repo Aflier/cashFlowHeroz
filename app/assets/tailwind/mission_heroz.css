@@ -5,7 +5,11 @@
 }
 
 .mission-badge-sm {
-  @apply mb-2 sm:mt-0 ml-1 px-2.5 py-1.5 bg-purple-800 text-white font-medium float-right hover:no-underline
+  @apply mb-2 sm:mt-0 ml-1 px-2.5 py-1.5 bg-purple-800 text-white font-medium hover:no-underline
+}
+
+.mission-card-badge {
+  @apply sm:mt-0 px-2.5 py-1.5 my-0.5 bg-purple-200 text-black font-medium hover:no-underline
 }
 
 .epic-card {

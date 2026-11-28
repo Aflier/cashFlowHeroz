@@ -1,0 +1,8 @@
+<div class="mission-card-badge">Creditors:
+  <%= @mission.creditors.sum(:current_balance) %></div>
+
+<div class="mission-card-badge">Banks:
+  <%= @mission.banks.sum(:current_balance) %></div>
+
+<div class="mission-card-badge">Runway:
+  <%#= @mission.creditors.sum(:current_balance) %></div>

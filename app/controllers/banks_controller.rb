@@ -61,13 +61,16 @@ class BanksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bank
-      @bank = Bank.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def bank_params
-      params.expect(bank: [ :name, :starting_balance, :starting_balance_on, :current_balance, :current_balance_on, :mission_id ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bank
+    @bank = Bank.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def bank_params
+    params.expect(bank: [ :name,
+                          :overdraft,
+                          :starting_balance, :starting_balance_on, :current_balance, :current_balance_on, :mission_id ])
+  end
 end

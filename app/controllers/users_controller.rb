@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   include UserSuiteControl
   include ConnectionControl
 
-  def slices
-    @user = User.find(params[:id])
+  before_action :set_user, only: %i[slices suite_links]
+
+  private
+
+  def set_user
+    @user = User.find(params.expect(:id))
   end
 end

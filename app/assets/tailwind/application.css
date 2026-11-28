@@ -9,6 +9,9 @@
 @import "./connectors.css" layer(components);
 @import "./crud_buttons.css" layer(components);
 @import "./forms.css" layer(components);
+@import "./headers.css" layer(components);
+@import "./mission_heroz.css" layer(components);
+@import "./shared.css" layer(components);
 @import "./slider.css" layer(components);
 @import "./suite_utilities.css";
 
@@ -59,10 +62,6 @@
 
     .btn-trash-sm {
         @apply w-full sm:w-auto text-center rounded-md px-1.5 py-1 bg-red-300 hover:bg-red-200 text-black inline-block font-medium
-    }
-
-    h1 {
-        @apply text-xl font-extrabold text-black md:text-4xl border-b-3 mb-3 pb-1;
     }
 
     input[type="submit"] {

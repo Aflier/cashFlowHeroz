@@ -1,36 +1,21 @@
 <h1><%= @legal_entity.name %></h1>
-<div class="card shadow mb-3">
-  <div class="card-header">Missions</div>
-  <div class="card-body">
-    <table class="table table-sm">
-      <thead>
-      <tr>
-        <th>Name</th>
-
-      </tr>
-      </thead>
-      <tbody>
-      <% @legal_entity.missions.each do |mission| %>
-        <tr>
-          <td><%= link_to_if (can? :show, mission), mission.name, mission %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
+<h2>Missions</h2>
+<div class="grid grid-cols-3">
+  <% @legal_entity.missions.each do |mission| %>
+    <%= turbo_frame_tag mission, src: mission_card_path(mission), target: :_top %>
+  <% end %>
 </div>
 
 <h4>Users</h4>
 <table>
   <thead>
-  <tr>
-    <th>Email</th>
-    <th>Role</th>
-    <th></th>
-  </tr>
+    <tr>
+      <th>Email</th>
+      <th>Role</th>
+      <th></th>
+    </tr>
   </thead>
   <tbody id="mission_users">
-  <%= render @legal_entity.entity_users %>
+    <%= render @legal_entity.entity_users %>
   </tbody>
 </table>
-

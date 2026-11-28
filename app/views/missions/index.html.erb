@@ -1,5 +1,7 @@
 <h1>Missions</h1>
 
 <% @missions.each do |mission| %>
+  <%= turbo_frame_tag @mission, src: mission_card_path(@mission), target: :_top %>
   <%= link_to_if (can? :show, mission), mission.name, mission %>
 <% end %>
+

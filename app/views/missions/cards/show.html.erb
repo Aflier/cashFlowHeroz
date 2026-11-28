@@ -1,0 +1,16 @@
+<%= turbo_frame_tag @mission do %>
+  <%= link_to @mission, class: "no-underline text-black" do %>
+    <div class="card-mission">
+      <%= icons__mission %>
+      <%= @mission.name %>
+      <% if current_user.missions.many? %>
+        <small>
+          <%= icons__legal_entity %>
+          <%= @mission.legal_entity.name %>
+        </small>
+      <% end %>
+
+      <%= render "badges" %>
+    </div>
+  <% end %>
+<% end %>
